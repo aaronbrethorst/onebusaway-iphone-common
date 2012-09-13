@@ -47,7 +47,7 @@
 	}
 	
 	NSDictionary * dict = value;
-	id entityId = [dict objectForKey:_jsonIdProperty];
+	id entityId = dict[_jsonIdProperty];
 	
 	if( entityId == nil ) {
 		context.error = [NSError errorWithDomain:OBAErrorDomain code:kOBAErrorMissingFieldInData userInfo:nil];

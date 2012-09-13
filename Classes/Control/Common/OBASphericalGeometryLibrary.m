@@ -131,7 +131,7 @@ typedef struct {
 	CLLocationCoordinate2D* pointArr = malloc(sizeof(CLLocationCoordinate2D) * locations.count);
 	
 	for (int i=0; i<locations.count;i++) {
-		CLLocation * location = [locations objectAtIndex:i];
+		CLLocation * location = locations[i];
 		CLLocationCoordinate2D p = location.coordinate;
 		pointArr[i] = p;
 	}
@@ -154,7 +154,7 @@ typedef struct {
 	NSMutableArray * array = [NSMutableArray array];
 	CLLocation * prevLocation = nil;
 	for (int i=0; i<points.count;i++) {
-		CLLocation * location = [points objectAtIndex:i];
+		CLLocation * location = points[i];
 		if( prevLocation == nil || i == (points.count - 1) || [prevLocation distanceFromLocation:location] > minDistance ) {
 			[array addObject:location];
 			prevLocation = location;

@@ -24,7 +24,7 @@
 	// If no cell is available, create a new one using the given identifier
 	if (cell == nil) {
 		NSArray * nib = [[NSBundle mainBundle] loadNibNamed:cellId owner:self options:nil];
-		cell = [nib objectAtIndex:0];
+		cell = nib[0];
 		cell.label.textAlignment = UITextAlignmentLeft;
 		cell.accessoryType = UITableViewCellAccessoryNone;					
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;

@@ -334,8 +334,8 @@ static NSString * const kReferences = @"references";
 }
 
 - (NSString*) getShapeV2FromJSON:(NSDictionary*)json error:(NSError*)error {
-	NSDictionary * entry = [json objectForKey:@"entry"];
-	return [entry objectForKey:@"points"];
+	NSDictionary * entry = json[@"entry"];
+	return entry[@"points"];
 }
 
 @end
@@ -344,7 +344,7 @@ static NSString * const kReferences = @"references";
 
 - (NSDictionary*) getDigesterParameters {
 	NSMutableDictionary * params = [NSMutableDictionary dictionary];
-	[params setObject:_references forKey:kReferences];
+	params[kReferences] = _references;
 	return params;
 }
 

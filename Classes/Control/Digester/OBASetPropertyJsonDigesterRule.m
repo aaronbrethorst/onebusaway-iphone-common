@@ -59,7 +59,7 @@
 	 */
 	if( [value isKindOfClass:[NSDecimalNumber class]] ) {
 		NSDecimalNumber * d = value;
-		value = [NSNumber numberWithDouble:[d doubleValue]];
+		value = @([d doubleValue]);
 	}
 	
 	if( _onlyIfNeeded ) {

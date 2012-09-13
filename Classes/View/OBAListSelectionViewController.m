@@ -45,7 +45,7 @@
     cell.textLabel.textAlignment = UITextAlignmentLeft;
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	cell.accessoryType = [self checkedItem] == indexPath ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
-	cell.textLabel.text = [_values objectAtIndex:indexPath.row];
+	cell.textLabel.text = _values[indexPath.row];
 	
 	return cell;
 }

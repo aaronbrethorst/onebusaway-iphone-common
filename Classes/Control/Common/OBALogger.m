@@ -63,14 +63,14 @@
 
 	switch( [error code] ) {
 		case NSValidationMultipleErrorsError: {
-			NSArray * errors = [userInfo objectForKey:@"NSDetailedErrors"];
+			NSArray * errors = userInfo[@"NSDetailedErrors"];
 			for( NSError * subError in errors )
 				[self logError:subError prefix:[NSString stringWithFormat:@"%@  ",prefix]];
 			break;
 		}			
 		case NSValidationMissingMandatoryPropertyError: {
-			NSString * validationErrorKey = [userInfo objectForKey:@"NSValidationErrorKey"];
-			id validationErrorObject = [userInfo objectForKey:@"NSValidationErrorObject"];
+			NSString * validationErrorKey = userInfo[@"NSValidationErrorKey"];
+			id validationErrorObject = userInfo[@"NSValidationErrorObject"];
 			NSLog(@"%@  validation error key: %@",prefix,validationErrorKey);
 			NSLog(@"%@  validation error object: %@",prefix,[validationErrorObject description]);
 			break;

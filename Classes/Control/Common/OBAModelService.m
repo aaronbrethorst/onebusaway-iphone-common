@@ -239,26 +239,26 @@ static const float kSearchRadius = 400;
     BOOL arriveBy = problem.arriveBy;
     NSDate * t = problem.time;
         
-    [args setObject:[NSString stringWithFormat:@"%lld",t] forKey:@"time"];
-    [args setObject:[NSString stringWithFormat:@"%f",from.latitude] forKey:@"latFrom"];
-    [args setObject:[NSString stringWithFormat:@"%f",from.longitude] forKey:@"lonFrom"];
-    [args setObject:[NSString stringWithFormat:@"%f",to.latitude] forKey:@"latTo"];
-    [args setObject:[NSString stringWithFormat:@"%f",to.longitude] forKey:@"lonTo"];
-    [args setObject:(arriveBy ? @"true" : @"false") forKey:@"arriveBy"];
-    [args setObject:@"true" forKey:@"useRealTime"];
+    args[@"time"] = [NSString stringWithFormat:@"%lld",t];
+    args[@"latFrom"] = [NSString stringWithFormat:@"%f",from.latitude];
+    args[@"lonFrom"] = [NSString stringWithFormat:@"%f",from.longitude];
+    args[@"latTo"] = [NSString stringWithFormat:@"%f",to.latitude];
+    args[@"lonTo"] = [NSString stringWithFormat:@"%f",to.longitude];
+    args[@"arriveBy"] = (arriveBy ? @"true" : @"false");
+    args[@"useRealTime"] = @"true";
 	
 	if( problem.data )
-		[args setObject:problem.data forKey:@"data"];
+		args[@"data"] = problem.data;
 	
 	if( problem.userComment )
-		[args setObject:problem.userComment forKey:@"userComment"];
+		args[@"userComment"] = problem.userComment;
 	
 	CLLocation * location = problem.userLocation;
 	if( location ) {
 		CLLocationCoordinate2D coord = location.coordinate;
-		[args setObject:[NSString stringWithFormat:@"%f",coord.latitude] forKey:@"userLat"];
-		[args setObject:[NSString stringWithFormat:@"%f",coord.longitude] forKey:@"userLon"];
-		[args setObject:[NSString stringWithFormat:@"%f",location.horizontalAccuracy] forKey:@"userLocationAccuracy"];
+		args[@"userLat"] = [NSString stringWithFormat:@"%f",coord.latitude];
+		args[@"userLon"] = [NSString stringWithFormat:@"%f",coord.longitude];
+		args[@"userLocationAccuracy"] = [NSString stringWithFormat:@"%f",location.horizontalAccuracy];
 	}
 	
 	SEL selector = nil;
@@ -276,21 +276,21 @@ static const float kSearchRadius = 400;
 	NSString * url = [NSString stringWithFormat:@"/api/where/report-problem-with-stop.json"];
 	
 	NSMutableDictionary * args = [[NSMutableDictionary alloc] init];
-	[args setObject:@"2" forKey:@"version"];
-	[args setObject:problem.stopId forKey:@"stopId"];
+	args[@"version"] = @"2";
+	args[@"stopId"] = problem.stopId;
 	
 	if( problem.data )
-		[args setObject:problem.data forKey:@"data"];
+		args[@"data"] = problem.data;
 	
 	if( problem.userComment )
-		[args setObject:problem.userComment forKey:@"userComment"];
+		args[@"userComment"] = problem.userComment;
 	
 	CLLocation * location = problem.userLocation;
 	if( location ) {
 		CLLocationCoordinate2D coord = location.coordinate;
-		[args setObject:[NSNumber numberWithDouble:coord.latitude] forKey:@"userLat"];
-		[args setObject:[NSNumber numberWithDouble:coord.longitude] forKey:@"userLon"];
-		[args setObject:[NSNumber numberWithDouble:location.horizontalAccuracy] forKey:@"userLocationAccuracy"];
+		args[@"userLat"] = @(coord.latitude);
+		args[@"userLon"] = @(coord.longitude);
+		args[@"userLocationAccuracy"] = @(location.horizontalAccuracy);
 	}
 	
 	SEL selector = nil;
@@ -306,34 +306,34 @@ static const float kSearchRadius = 400;
 	
 	NSMutableDictionary * args = [[NSMutableDictionary alloc] init];
 	OBATripInstanceRef * tripInstance = problem.tripInstance;
-	[args setObject:@"2" forKey:@"version"];
-	[args setObject:tripInstance.tripId forKey:@"tripId"];
-	[args setObject:[NSString stringWithFormat:@"%lld",tripInstance.serviceDate] forKey:@"serviceDate"];
+	args[@"version"] = @"2";
+	args[@"tripId"] = tripInstance.tripId;
+	args[@"serviceDate"] = [NSString stringWithFormat:@"%lld",tripInstance.serviceDate];
 	if( tripInstance.vehicleId ) {
 		NSLog(@"vid=%@",tripInstance.vehicleId);
-		[args setObject:tripInstance.vehicleId forKey:@"vehicleId"];
+		args[@"vehicleId"] = tripInstance.vehicleId;
 	}
 	
 	if( problem.stopId )	
-		[args setObject:problem.stopId forKey:@"stopId"];
+		args[@"stopId"] = problem.stopId;
 	
 	if( problem.data )
-		[args setObject:problem.data forKey:@"data"];
+		args[@"data"] = problem.data;
 	
 	if( problem.userComment )
-		[args setObject:problem.userComment forKey:@"userComment"];
+		args[@"userComment"] = problem.userComment;
 	
-	[args setObject:(problem.userOnVehicle ? @"true" : @"false") forKey:@"userOnVehicle"];
+	args[@"userOnVehicle"] = (problem.userOnVehicle ? @"true" : @"false");
 
 	if( problem.userVehicleNumber )
-		[args setObject:problem.userVehicleNumber forKey:@"userVehicleNumber"];
+		args[@"userVehicleNumber"] = problem.userVehicleNumber;
 	
 	CLLocation * location = problem.userLocation;
 	if( location ) {
 		CLLocationCoordinate2D coord = location.coordinate;
-		[args setObject:[NSNumber numberWithDouble:coord.latitude] forKey:@"userLat"];
-		[args setObject:[NSNumber numberWithDouble:coord.longitude] forKey:@"userLon"];
-		[args setObject:[NSNumber numberWithDouble:location.horizontalAccuracy] forKey:@"userLocationAccuracy"];
+		args[@"userLat"] = @(coord.latitude);
+		args[@"userLon"] = @(coord.longitude);
+		args[@"userLocationAccuracy"] = @(location.horizontalAccuracy);
 	}
 	
 	SEL selector = nil;
@@ -367,7 +367,7 @@ static const float kSearchRadius = 400;
         [data appendFormat:@"%f",location.horizontalAccuracy];
     }
     
-    [args setObject:data forKey:@"data"];
+    args[@"data"] = data;
     [data release];
     
 	SEL selector = @selector(getCurrentVehicleEstimatesV2FromJSON:error:);
@@ -384,17 +384,17 @@ static const float kSearchRadius = 400;
     NSTimeInterval interval = [time timeIntervalSince1970];
     long long t = (interval * 1000);
     
-    [args setObject:[NSString stringWithFormat:@"%lld",t] forKey:@"time"];
-    [args setObject:[NSString stringWithFormat:@"%f",from.latitude] forKey:@"latFrom"];
-    [args setObject:[NSString stringWithFormat:@"%f",from.longitude] forKey:@"lonFrom"];
-    [args setObject:[NSString stringWithFormat:@"%f",to.latitude] forKey:@"latTo"];
-    [args setObject:[NSString stringWithFormat:@"%f",to.longitude] forKey:@"lonTo"];
-    [args setObject:(arriveBy ? @"true" : @"false") forKey:@"arriveBy"];
-    [args setObject:@"true" forKey:@"useRealTime"];
+    args[@"time"] = [NSString stringWithFormat:@"%lld",t];
+    args[@"latFrom"] = [NSString stringWithFormat:@"%f",from.latitude];
+    args[@"lonFrom"] = [NSString stringWithFormat:@"%f",from.longitude];
+    args[@"latTo"] = [NSString stringWithFormat:@"%f",to.latitude];
+    args[@"lonTo"] = [NSString stringWithFormat:@"%f",to.longitude];
+    args[@"arriveBy"] = (arriveBy ? @"true" : @"false");
+    args[@"useRealTime"] = @"true";
     
     // Append all options
     for (NSString * key in options ) {
-        [args setObject:[options objectForKey:key] forKey:key];
+        args[key] = options[key];
     }
         
 	SEL selector = @selector(getItinerariesV2FromJSON:error:);
@@ -414,18 +414,18 @@ static const float kSearchRadius = 400;
 	NSString * url = [NSString stringWithFormat:@"/api/where/register-alarm-for-arrival-and-departure-at-stop/%@.json", stopId];
     
     NSMutableDictionary * args = [[NSMutableDictionary alloc] init];
-    [args setObject:tripInstance.tripId forKey:@"tripId"];
-    [args setObject:[NSString stringWithFormat:@"%lld",tripInstance.serviceDate] forKey:@"serviceDate"];
+    args[@"tripId"] = tripInstance.tripId;
+    args[@"serviceDate"] = [NSString stringWithFormat:@"%lld",tripInstance.serviceDate];
 	if( tripInstance.vehicleId )
-		[args setObject:tripInstance.vehicleId forKey:@"vehicleId"];
+		args[@"vehicleId"] = tripInstance.vehicleId;
 	if( instance.stopSequence >= 0 )
-        [args setObject:[NSString stringWithFormat:@"%d",instance.stopSequence] forKey:@"stopSequence"];
+        args[@"stopSequence"] = [NSString stringWithFormat:@"%d",instance.stopSequence];
     
     if( onArrival )
-        [args setObject:@"true" forKey:@"onArrival"];
+        args[@"onArrival"] = @"true";
     
     if( alarmTimeOffset != 0 )
-        [args setObject:[NSString stringWithFormat:@"%d",alarmTimeOffset] forKey:@"alarmTimeOffset"];
+        args[@"alarmTimeOffset"] = [NSString stringWithFormat:@"%d",alarmTimeOffset];
     
     if (notificationOptions) {
 
@@ -434,7 +434,7 @@ static const float kSearchRadius = 400;
 
         if (json)
         {
-            [args setObject:json forKey:@"data"];
+            args[@"data"] = json;
         }
         [json release];
     }
@@ -444,7 +444,7 @@ static const float kSearchRadius = 400;
     NSMutableString * tokenString = [[NSMutableString alloc] initWithString:@"apns:"];
     for( NSInteger i=0; i < [token length]; i++)
         [tokenString appendFormat:@"%02X",(unsigned long)(tokenBuffer[i])];
-    [args setObject:tokenString forKey:@"url"];
+    args[@"url"] = tokenString;
     NSLog(@"Token String: %@ %d",tokenString,[token length]);
     [tokenString release];
     
@@ -573,7 +573,7 @@ static const float kSearchRadius = 400;
             [s appendString:@"&"];
         [s appendString:[self escapeStringForUrl:key]];
         [s appendString:@"="];
-        [s appendString:[self escapeStringForUrl:[args objectForKey:key]]];
+        [s appendString:[self escapeStringForUrl:args[key]]];
     }
     return s;
 }

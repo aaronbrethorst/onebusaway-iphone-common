@@ -72,8 +72,8 @@
 	if( [array count] < 2 )
 		return;
 	
-	NSNumber * longitude = [array objectAtIndex:0];
-	NSNumber * latitude = [array objectAtIndex:1];
+	NSNumber * longitude = array[0];
+	NSNumber * latitude = array[1];
 	
 	[self setCoordinate:context name:name lat:latitude lon:longitude];
 }
@@ -85,8 +85,8 @@
 	
 	NSDictionary * dictionary = (NSDictionary*)value;
 	
-	NSNumber * latitude = [dictionary objectForKey:self.latJsonName];
-	NSNumber * longitude = [dictionary objectForKey:self.lonJsonName];
+	NSNumber * latitude = dictionary[self.latJsonName];
+	NSNumber * longitude = dictionary[self.lonJsonName];
 	
 	[self setCoordinate:context name:name lat:latitude lon:longitude];
 }

@@ -28,7 +28,7 @@
 	
 	if (cell == nil) {
 		NSArray * nib = [[NSBundle mainBundle] loadNibNamed:kCellId owner:self options:nil];
-		cell = [nib objectAtIndex:0];
+		cell = nib[0];
 		cell.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
 	}
 	

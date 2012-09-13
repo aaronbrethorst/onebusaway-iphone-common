@@ -30,7 +30,7 @@
 
 +(OBATextEditViewController*)pushOntoViewController:(UIViewController*)parent withText:(NSString*)text withTitle:(NSString*)title readOnly:(BOOL)readOnly {
 	NSArray* wired = [[NSBundle mainBundle] loadNibNamed:@"OBATextEditViewController" owner:parent options:nil];
-	OBATextEditViewController* controller = [wired objectAtIndex:0];
+	OBATextEditViewController* controller = wired[0];
 	[controller setTitle:title];
 	
 	UITextView * textView = [controller textView];
@@ -100,7 +100,7 @@
 
 -(void)keyboardDidShow:(NSNotification*)notification {
 	if (_keyboardShowing) {return;}
-	NSValue* bounds = [[notification userInfo] objectForKey:UIKeyboardBoundsUserInfoKey];
+	NSValue* bounds = [notification userInfo][UIKeyboardBoundsUserInfoKey];
 	CGSize keyboardSize = [bounds CGRectValue].size;
 	CGRect frame = [[self view] frame];
 	_nokeyboardHeight = frame.size.height;

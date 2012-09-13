@@ -18,8 +18,8 @@
 	
 	NSDictionary * dictionary = (NSDictionary*)value;
 	
-	NSNumber * latitude = [dictionary objectForKey:@"lat"];
-	NSNumber * longitude = [dictionary objectForKey:@"lon"];
+	NSNumber * latitude = dictionary[@"lat"];
+	NSNumber * longitude = dictionary[@"lon"];
 	
 	CLLocation * location = [[[CLLocation alloc] initWithLatitude:[latitude doubleValue] longitude:[longitude doubleValue]] autorelease];
 	[super begin:context name:name value:location];

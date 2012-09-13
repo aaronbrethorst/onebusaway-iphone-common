@@ -30,43 +30,43 @@
 }
 
 - (void) addAgency:(OBAAgencyV2*)agency {
-	[_agencies setObject:agency forKey:agency.agencyId];
+	_agencies[agency.agencyId] = agency;
 }
 
 - (OBAAgencyV2*) getAgencyForId:(NSString*)agencyId {
-	return [_agencies objectForKey:agencyId];
+	return _agencies[agencyId];
 }	
 
 - (void) addRoute:(OBARouteV2*)route {
-	[_routes setObject:route forKey:route.routeId];
+	_routes[route.routeId] = route;
 }
 
 - (OBARouteV2*) getRouteForId:(NSString*)routeId {
-	return [_routes objectForKey:routeId];
+	return _routes[routeId];
 }	
 
 - (void) addStop:(OBAStopV2*)stop {
-	[_stops setObject:stop forKey:stop.stopId];
+	_stops[stop.stopId] = stop;
 }
 
 - (OBAStopV2*) getStopForId:(NSString*)stopId {
-	return [_stops objectForKey:stopId];
+	return _stops[stopId];
 }
 
 - (void) addTrip:(OBATripV2*)trip {
-	[_trips setObject:trip forKey:trip.tripId];
+	_trips[trip.tripId] = trip;
 }
 
 - (OBATripV2*) getTripForId:(NSString*)tripId {
-	return [_trips objectForKey:tripId];
+	return _trips[tripId];
 }
 
 - (void) addSituation:(OBASituationV2*)situation {
-	[_situations setObject:situation forKey:situation.situationId];
+	_situations[situation.situationId] = situation;
 }
 
 - (OBASituationV2*) getSituationForId:(NSString*)situationId {
-	return [_situations objectForKey:situationId];
+	return _situations[situationId];
 }
 
 - (void) clear {

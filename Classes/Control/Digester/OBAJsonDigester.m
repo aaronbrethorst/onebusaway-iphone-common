@@ -68,10 +68,10 @@
 }
 
 - (void) addRule:(id<OBAJsonDigesterRule>)rule forPrefix:(NSString*)prefix {
-	NSMutableArray * rules = [_rulesByPrefix objectForKey:prefix];
+	NSMutableArray * rules = _rulesByPrefix[prefix];
 	if( ! rules ) {
 		rules = [NSMutableArray array];
-		[_rulesByPrefix setObject:rules forKey:prefix];
+		_rulesByPrefix[prefix] = rules;
 	}
 	[rules addObject:rule];
 }
@@ -122,7 +122,7 @@
 }
 
 - (void) parse:(id)jsonRoot withRoot:(id)rootObject error:(NSError**)error {
-	[self parse:jsonRoot withRoot:rootObject parameters:[NSDictionary dictionary] error:error];
+	[self parse:jsonRoot withRoot:rootObject parameters:@{} error:error];
 }
 
 - (void) parse:(id)jsonRoot withRoot:(id)rootObject parameters:(NSDictionary*)parameters error:(NSError**)error {
@@ -130,7 +130,7 @@
 	OBAJsonDigesterContextImpl * context = [[OBAJsonDigesterContextImpl alloc] initWithVerbose:_verbose];
 	
 	for( id key in parameters )
-		[context setParamter:[parameters objectForKey:key] forKey:key];
+		[context setParamter:parameters[key] forKey:key];
 	
 	if( rootObject )
 		[context pushValue:rootObject];
@@ -170,7 +170,7 @@
 	if( _verbose )
 		OBALogDebug(@"path=%@",fullName);
 	
-	NSArray * rules = [_rulesByPrefix objectForKey:fullName];
+	NSArray * rules = _rulesByPrefix[fullName];
 	
 	if( rules ) {
 		for( id<OBAJsonDigesterRule,NSObject> rule in rules) {
@@ -188,7 +188,7 @@
 			if( ! [key isKindOfClass:[NSString class]] )
 				continue;
 			NSString * keyString = (NSString*)key;
-			id nextValue = [dictionary objectForKey:key];
+			id nextValue = dictionary[key];
 			[self recursivelyParse:context jsonValue:nextValue prefix:fullName name:keyString];
 			if( context.error )
 				return;
@@ -208,7 +208,7 @@
 	
 	if( rules ) {
 		for( NSInteger i = [rules count]-1; i>=0; i--) {
-			id<OBAJsonDigesterRule,NSObject> rule = [rules objectAtIndex:i];
+			id<OBAJsonDigesterRule,NSObject> rule = rules[i];
 			if( [rule respondsToSelector:@selector(end:name:value:)] ) {
 				[rule end:context name:name value:value];
 				if( context.error )
@@ -254,7 +254,7 @@
         NSLog(@"OBAJsonDigesterContextImpl: peek - index out of bounds: %d => %d", index, objIndex);
         return nil;
     }
-	return [_stack objectAtIndex:objIndex];
+	return _stack[objIndex];
 }
 
 -(void) popValue {
@@ -262,11 +262,11 @@
 }
 
 - (id) getParameterForKey:(id)key {
-	return [_parameters objectForKey:key];
+	return _parameters[key];
 }
 
 - (void) setParamter:(id)value forKey:(id)key {
-	[_parameters setObject:value forKey:key];
+	_parameters[key] = value;
 }
 
 - (BOOL) verbose {

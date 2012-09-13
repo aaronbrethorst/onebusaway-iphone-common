@@ -163,9 +163,9 @@
 	if( _config.args )
 		[body appendString:_config.args];
 	for (NSString* paramName in args) {
-		id values = [args objectForKey:paramName];
+		id values = args[paramName];
 		if( ! [values isKindOfClass:[NSArray class]] )
-			values = [NSArray arrayWithObject:values];
+			values = @[values];
 		
 		for( id paramValue in values ) {
 			if( [body length] > 0 )

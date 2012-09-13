@@ -42,7 +42,7 @@
 	
 	NSString * key = [NSString stringWithFormat:@"%@StopIcon%@",routeIconType,direction];
 	
-	UIImage * image = [_stopIcons objectForKey:key];
+	UIImage * image = _stopIcons[key];
 	
 	if( ! image || [image isEqual:[NSNull null]] )
 		return _defaultStopIcon;
@@ -82,21 +82,21 @@
 	
 	_stopIcons = [[NSMutableDictionary alloc] init];
 	
-	NSArray * directionIds = [NSArray arrayWithObjects:@"",@"N",@"NE",@"E",@"SE",@"S",@"SW",@"W",@"NW",nil];
-	NSArray * iconTypeIds = [NSArray arrayWithObjects:@"Bus",@"LightRail",@"Rail",@"Ferry",nil];
+	NSArray * directionIds = @[@"",@"N",@"NE",@"E",@"SE",@"S",@"SW",@"W",@"NW"];
+	NSArray * iconTypeIds = @[@"Bus",@"LightRail",@"Rail",@"Ferry"];
 	
 	for( int j=0; j<[iconTypeIds count]; j++) {
-		NSString * iconType = [iconTypeIds objectAtIndex:j];
+		NSString * iconType = iconTypeIds[j];
 		for( int i=0; i<[directionIds count]; i++) {		
-			NSString * directionId = [directionIds objectAtIndex:i];
+			NSString * directionId = directionIds[i];
 			NSString * key = [NSString stringWithFormat:@"%@StopIcon%@",iconType,directionId];
 			NSString * imageName = [NSString stringWithFormat:@"%@.png",key];
 			UIImage * image = [UIImage imageNamed:imageName];
-			[_stopIcons setObject:image forKey:key];
+			_stopIcons[key] = image;
 		}		
 	}	
 	
-	_defaultStopIcon = [_stopIcons objectForKey:@"BusStopIcon"];
+	_defaultStopIcon = _stopIcons[@"BusStopIcon"];
 }
 
 - (NSString*) getRouteIconTypeForStop:(OBAStopV2*)stop {
@@ -111,11 +111,11 @@
 - (NSString*) getRouteIconTypeForRouteTypes:(NSSet*)routeTypes {
     
 	// Heay rail dominations
-	if( [routeTypes containsObject:[NSNumber numberWithInt:4]] )
+	if( [routeTypes containsObject:@4] )
 		return @"Ferry";
-	else if( [routeTypes containsObject:[NSNumber numberWithInt:2]] )
+	else if( [routeTypes containsObject:@2] )
 		return @"Rail";
-	else if( [routeTypes containsObject:[NSNumber numberWithInt:0]] )
+	else if( [routeTypes containsObject:@0] )
 		return @"LightRail";
 	else
 		return @"Bus";    

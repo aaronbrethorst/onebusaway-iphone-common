@@ -12,7 +12,7 @@
 
 +(OBAWebViewController*)pushOntoViewController:(UIViewController*)parent withHtml:(NSString*)html withTitle:(NSString*)title {
 	NSArray* wired = [[NSBundle mainBundle] loadNibNamed:@"OBAWebViewController" owner:parent options:nil];
-	OBAWebViewController* controller = [wired objectAtIndex:0];
+	OBAWebViewController* controller = wired[0];
 	[controller setTitle:title];
 	
 	UIWebView * webView = [controller webView];

@@ -193,12 +193,12 @@ static const BOOL kUseLocationTraceInSimulator = FALSE;
 	if( _locationTraceIndex >= [_locationTrace count] )
 		return;
 	
-	NSDictionary * record = [_locationTrace objectAtIndex:_locationTraceIndex];
+	NSDictionary * record = _locationTrace[_locationTraceIndex];
 	
-	NSNumber * lat = [record objectForKey:@"lat"];
-	NSNumber * lon = [record objectForKey:@"lon"];
-	NSNumber * accuracy = [record objectForKey:@"accuracy"];
-	NSNumber * time = [record objectForKey:@"time"];
+	NSNumber * lat = record[@"lat"];
+	NSNumber * lon = record[@"lon"];
+	NSNumber * accuracy = record[@"accuracy"];
+	NSNumber * time = record[@"time"];
 	
 	CLLocationCoordinate2D point = { [lat doubleValue], [lon doubleValue] };
 	CLLocation * newLocation = [[CLLocation alloc] initWithCoordinate:point
@@ -211,8 +211,8 @@ static const BOOL kUseLocationTraceInSimulator = FALSE;
 	
 	_locationTraceIndex++;
 	if( _locationTraceIndex < [_locationTrace count] ) { 
-		NSDictionary * record2 = [_locationTrace objectAtIndex:_locationTraceIndex];
-		NSNumber * time2 = [record2 objectForKey:@"time"];
+		NSDictionary * record2 = _locationTrace[_locationTraceIndex];
+		NSNumber * time2 = record2[@"time"];
 		NSTimeInterval interval = [time2 doubleValue] - [time doubleValue];
 		interval = MAX(interval,0);
 		[self performSelector:@selector(handleSimulatedLocationTrace) withObject:nil afterDelay:interval];
