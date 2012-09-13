@@ -108,7 +108,7 @@
 	
 	// If no cell is available, create a new one using the given identifier
 	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellId] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId] autorelease];
 	}
 	
 	return cell;
