@@ -17,6 +17,9 @@
 #import "OBACreateObjectJsonDigesterRule.h"
 #import "OBALogger.h"
 
+@interface OBACreateObjectJsonDigesterRule ()
+- (BOOL)shouldDigestValue:(id)value;
+@end
 
 @implementation OBACreateObjectJsonDigesterRule
 
@@ -33,7 +36,7 @@
 #pragma mark OBAJsonDigesterRule Methods
 
 - (void) begin:(id<OBAJsonDigesterContext>)context name:(NSString*)name value:(id)value {
-	if( ! (_onlyIfNotNull && (value == nil || value == kCFNull)) ) {
+	if([self shouldDigestValue:value]) {
 		id obj = [[_objectClass alloc] init];
 		[context pushValue:obj];
 		[obj release];
@@ -43,9 +46,14 @@
 }
 
 - (void) end:(id<OBAJsonDigesterContext>)context name:(NSString*)name value:(id)value {
-	if( ! (_onlyIfNotNull && (value == nil || value == kCFNull)) ) {
+	if([self shouldDigestValue:value]) {
 		[context popValue];
 	}
+}
+
+- (BOOL)shouldDigestValue:(id)value {
+    BOOL valueIsNull = (!value || CFEqual(value, kCFNull));
+    return !(_onlyIfNotNull && valueIsNull);
 }
 
 
