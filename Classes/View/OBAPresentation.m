@@ -148,7 +148,7 @@ static const float kStopForRouteAnnotationMinScaleDistance = 8000;
 	CLLocation * a = [[CLLocation alloc] initWithLatitude:lat1 longitude:lon1];
 	CLLocation * b = [[CLLocation alloc] initWithLatitude:lat2 longitude:lon2];
 	
-	double d = [a distanceFromLocationSafe:b];
+	CLLocationDistance d = [a distanceFromLocation:b];
 	
 	[a release];
 	[b release];
@@ -166,6 +166,11 @@ static const float kStopForRouteAnnotationMinScaleDistance = 8000;
 	else {
 		return kStopForRouteAnnotationMinScale;
 	}
+}
+
++ (void)showSituations:(NSArray*)situations withAppContext:(OBAApplicationContext*)appContext navigationController:(UINavigationController*)navController args:(NSDictionary*)args
+{
+    NSLog(@"TODO: %s", __PRETTY_FUNCTION__);
 }
 
 @end
