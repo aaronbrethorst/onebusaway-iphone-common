@@ -8,13 +8,6 @@
 @synthesize userComment;
 @synthesize userLocation;
 
-- (void) dealloc {
-	self.stopId = nil;
-	self.data = nil;
-	self.userComment = nil;
-	self.userLocation = nil;	
-	[super dealloc];
-}
 
 
 @end

@@ -8,10 +8,10 @@
 	NSMutableArray * _polylines;
 }
 
-@property (nonatomic, retain) NSString * routeId;
-@property (nonatomic, readonly) OBARouteV2 * route;
-@property (nonatomic, readonly) NSArray * stops;
-@property (nonatomic, readonly) NSArray * polylines;
+@property (nonatomic, strong) NSString * routeId;
+@property (weak, nonatomic, readonly) OBARouteV2 * route;
+@property (weak, nonatomic, readonly) NSArray * stops;
+@property (weak, nonatomic, readonly) NSArray * polylines;
 
 - (id) initWithReferences:(OBAReferencesV2*)refs;
 

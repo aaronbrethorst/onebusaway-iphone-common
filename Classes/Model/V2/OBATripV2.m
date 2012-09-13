@@ -13,18 +13,6 @@
 @synthesize directionId;
 @synthesize blockId;
 
-- (void) dealloc {
-    self.tripId = nil;
-    self.routeId = nil;
-    self.routeShortName = nil;
-    self.tripShortName = nil;
-    self.tripHeadsign = nil;
-    self.serviceId = nil;
-    self.shapeId = nil;
-    self.directionId = nil;
-    self.blockId = nil;
-    [super dealloc];
-}
 
 - (OBARouteV2*) route {
 	OBAReferencesV2 * refs = self.references;

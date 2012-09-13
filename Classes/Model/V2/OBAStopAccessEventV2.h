@@ -4,8 +4,8 @@
 
 - (id) initWithCoder:(NSCoder*)coder;
 
-@property (nonatomic,retain) NSString * title;
-@property (nonatomic,retain) NSString * subtitle;
-@property (nonatomic, retain) NSArray * stopIds;
+@property (nonatomic,strong) NSString * title;
+@property (nonatomic,strong) NSString * subtitle;
+@property (nonatomic, strong) NSArray * stopIds;
 
 @end

@@ -2,9 +2,9 @@
 
 }
 
-@property (nonatomic,retain) NSString * stopId;
-@property (nonatomic,retain) NSString * data;
-@property (nonatomic,retain) NSString * userComment;
-@property (nonatomic,retain) CLLocation * userLocation;
+@property (nonatomic,strong) NSString * stopId;
+@property (nonatomic,strong) NSString * data;
+@property (nonatomic,strong) NSString * userComment;
+@property (nonatomic,strong) CLLocation * userLocation;
 
 @end

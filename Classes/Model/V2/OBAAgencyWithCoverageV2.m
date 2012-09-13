@@ -6,10 +6,6 @@
 @synthesize agencyId;
 @synthesize coordinate;
 
-- (void) dealloc {
-	self.agencyId = nil;
-	[super dealloc];
-}
 
 - (OBAAgencyV2*) agency {
 	OBAReferencesV2 * refs = [self references];

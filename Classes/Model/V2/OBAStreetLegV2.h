@@ -2,8 +2,8 @@
     
 }
 
-@property (nonatomic,retain) NSString * streetName;
-@property (nonatomic,retain) NSString * path;
+@property (nonatomic,strong) NSString * streetName;
+@property (nonatomic,strong) NSString * path;
 @property (nonatomic) double distance;
 
 @end

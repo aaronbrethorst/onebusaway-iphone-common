@@ -10,21 +10,16 @@
 - (id) initWithTripId:(NSString*)tripId serviceDate:(long long)serviceDate vehicleId:(NSString*)vehicleId {
     self = [super init];
 	if( self ) {
-		_tripId = [tripId retain];
+		_tripId = tripId;
 		_serviceDate = serviceDate;
-		_vehicleId = [vehicleId retain];
+		_vehicleId = vehicleId;
 	}
 	return self;
 }
 
-- (void) dealloc {
-    [_tripId release];
-    [_vehicleId release];
-    [super dealloc];
-}
 
 + (OBATripInstanceRef*) tripInstance:(NSString*)tripId serviceDate:(long long)serviceDate vehicleId:(NSString*)vehicleId {
-	return [[[OBATripInstanceRef alloc] initWithTripId:tripId serviceDate:serviceDate vehicleId:vehicleId] autorelease];
+	return [[OBATripInstanceRef alloc] initWithTripId:tripId serviceDate:serviceDate vehicleId:vehicleId];
 }
 
 - (OBATripInstanceRef*) copyWithNewTripId:(NSString*)newTripId {

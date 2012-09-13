@@ -12,16 +12,6 @@
 @synthesize longitude;
 @synthesize routeIds;
 
-- (void) dealloc {
-    self.name = nil;
-    self.code = nil;
-    self.direction = nil;
-    self.latitude = nil;
-    self.longitude = nil;
-    self.stopId = nil;
-    self.routeIds = nil;
-    [super dealloc];
-}
 
 - (NSArray*) routes {
 

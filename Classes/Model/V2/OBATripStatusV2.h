@@ -8,20 +8,20 @@
 
 }
 
-@property (nonatomic,retain) NSString * activeTripId;
-@property (nonatomic,readonly) OBATripV2 * activeTrip;
+@property (nonatomic,strong) NSString * activeTripId;
+@property (weak, nonatomic,readonly) OBATripV2 * activeTrip;
 
 @property (nonatomic) long long serviceDate;
-@property (nonatomic,retain) OBAFrequencyV2 * frequency;
+@property (nonatomic,strong) OBAFrequencyV2 * frequency;
 
-@property (nonatomic,retain) CLLocation * location;
+@property (nonatomic,strong) CLLocation * location;
 @property (nonatomic) BOOL predicted;
 @property (nonatomic) NSInteger scheduleDeviation;
-@property (nonatomic,retain) NSString * vehicleId;
+@property (nonatomic,strong) NSString * vehicleId;
 
 @property (nonatomic) long long lastUpdateTime;
-@property (nonatomic,retain) CLLocation * lastKnownLocation;
+@property (nonatomic,strong) CLLocation * lastKnownLocation;
 
-@property (nonatomic,readonly) OBATripInstanceRef * tripInstance;
+@property (weak, nonatomic,readonly) OBATripInstanceRef * tripInstance;
 
 @end

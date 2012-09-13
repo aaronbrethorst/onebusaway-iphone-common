@@ -3,15 +3,8 @@
 
 @implementation OBAModalActivityIndicator
 
-- (void) dealloc {
-	[_modalView release];
-	[_activityIndicatorView release];
-	[super dealloc];
-}
 
 - (void) show:(UIView*)view {
-	[_modalView release];
-	[_activityIndicatorView release];
 	
 	_modalView = [[UIView alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
 	_modalView.alpha = 0.5;
@@ -26,9 +19,7 @@
 
 - (void) hide {
 	[_modalView removeFromSuperview];
-	[_modalView release];
 	_modalView = nil;
-	[_activityIndicatorView release];
 	_activityIndicatorView = nil;
 }
 

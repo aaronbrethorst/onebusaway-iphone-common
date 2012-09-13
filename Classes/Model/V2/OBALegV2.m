@@ -19,18 +19,6 @@
     return self;
 }
 
-- (void) dealloc {
-    [_streetLegs release];
-    _streetLegs = nil;
-    
-    self.startTime = nil;
-    self.endTime = nil;
-    self.mode = nil;
-
-    self.transitLeg = nil;
-    
-    [super dealloc];
-}
 
 - (void) addStreetLeg:(OBAStreetLegV2 *)streetLeg {
     [_streetLegs addObject:streetLeg];

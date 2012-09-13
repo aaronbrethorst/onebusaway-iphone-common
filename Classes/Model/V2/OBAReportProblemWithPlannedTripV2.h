@@ -2,12 +2,12 @@
     
 }
 
-@property (nonatomic,retain) CLLocation * fromLocation;
-@property (nonatomic,retain) CLLocation * toLocation;
-@property (nonatomic,retain) NSDate * time;
+@property (nonatomic,strong) CLLocation * fromLocation;
+@property (nonatomic,strong) CLLocation * toLocation;
+@property (nonatomic,strong) NSDate * time;
 @property (nonatomic) BOOL arriveBy;
-@property (nonatomic,retain) NSString * data;
-@property (nonatomic,retain) NSString * userComment;
-@property (nonatomic,retain) CLLocation * userLocation;
+@property (nonatomic,strong) NSString * data;
+@property (nonatomic,strong) NSString * userComment;
+@property (nonatomic,strong) CLLocation * userLocation;
 
 @end

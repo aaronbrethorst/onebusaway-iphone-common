@@ -24,11 +24,11 @@
 	CLLocationCoordinate2D _coordinate;
 }
 
-@property (nonatomic,retain) NSString * name;
-@property (nonatomic,retain) NSString * address;
-@property (nonatomic,retain) NSString * icon;
+@property (nonatomic,strong) NSString * name;
+@property (nonatomic,strong) NSString * address;
+@property (nonatomic,strong) NSString * icon;
 @property (nonatomic) CLLocationCoordinate2D coordinate;
-@property (nonatomic,readonly) CLLocation * location;
+@property (weak, nonatomic,readonly) CLLocation * location;
 
 -(id) initWithAddress:(NSString*)address coordinate:(CLLocationCoordinate2D)coordinate;
 -(id) initWithCoder:(NSCoder*)coder;

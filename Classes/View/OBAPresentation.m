@@ -150,8 +150,6 @@ static const float kStopForRouteAnnotationMinScaleDistance = 8000;
 	
 	CLLocationDistance d = [a distanceFromLocation:b];
 	
-	[a release];
-	[b release];
 	
 	if( d <= kStopForRouteAnnotationMaxScaleDistance ) { 
 		return 1.0;

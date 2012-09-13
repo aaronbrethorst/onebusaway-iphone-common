@@ -43,7 +43,7 @@
 
 - (id) initWithModelDao:(OBAModelDAO*)modelDao;
 
-@property (nonatomic,retain) CLLocation * currentLocation;
+@property (nonatomic,strong) CLLocation * currentLocation;
 @property (readonly, nonatomic) BOOL locationServicesEnabled;
 
 - (void) addDelegate:(id<OBALocationManagerDelegate>)delegate;

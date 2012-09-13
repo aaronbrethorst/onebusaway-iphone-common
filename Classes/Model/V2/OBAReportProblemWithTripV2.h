@@ -5,12 +5,12 @@
 
 }
 
-@property (nonatomic,retain) OBATripInstanceRef * tripInstance;
-@property (nonatomic,retain) NSString * stopId;
-@property (nonatomic,retain) NSString * data;
-@property (nonatomic,retain) NSString * userComment;
+@property (nonatomic,strong) OBATripInstanceRef * tripInstance;
+@property (nonatomic,strong) NSString * stopId;
+@property (nonatomic,strong) NSString * data;
+@property (nonatomic,strong) NSString * userComment;
 @property (nonatomic) BOOL userOnVehicle;
-@property (nonatomic,retain) NSString * userVehicleNumber;
-@property (nonatomic,retain) CLLocation * userLocation;
+@property (nonatomic,strong) NSString * userVehicleNumber;
+@property (nonatomic,strong) CLLocation * userLocation;
 
 @end

@@ -29,8 +29,7 @@ NSString * const OBAApplicationDidCompleteNetworkRequestNotification = @"OBAAppl
 + (id) releaseOld:(id<NSObject>)oldValue retainNew:(id<NSObject>)newValue {
 	if( oldValue == newValue )
 		return newValue;
-	[oldValue release];
-	return [newValue retain];
+	return newValue;
 }
 
 @end
@@ -61,7 +60,6 @@ NSString * const OBAApplicationDidCompleteNetworkRequestNotification = @"OBAAppl
 	[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
 	[dateFormatter setDateStyle:kCFDateFormatterNoStyle];	
 	NSString * result = [dateFormatter stringFromDate:[NSDate date]];
-	[dateFormatter release];
 	return result;
 }
 

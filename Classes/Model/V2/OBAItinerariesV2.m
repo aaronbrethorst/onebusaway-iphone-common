@@ -13,10 +13,6 @@
     return self;
 }
 
--(void)dealloc {
-    [_itineraries release];
-    [super dealloc];
-}
 
 -(void) addItinerary:(OBAItineraryV2*)itinerary {
     [_itineraries addObject:itinerary];

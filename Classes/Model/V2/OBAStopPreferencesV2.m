@@ -28,15 +28,11 @@
 	if( self ) {
 		NSNumber * sortTripsByType = [coder decodeObjectForKey:@"sortTripsByType"];
 		_sortTripsByType = [sortTripsByType intValue];
-		_routeFilter =  [[coder decodeObjectForKey:@"routeFilter"] retain];
+		_routeFilter =  [coder decodeObjectForKey:@"routeFilter"];
 	}
 	return self;
 }
 	
-- (void) dealloc {
-	[_routeFilter release];
-	[super dealloc];
-}
 
 - (BOOL) isRouteIdEnabled:(NSString*) routeId {
 	return ! [_routeFilter containsObject:routeId];

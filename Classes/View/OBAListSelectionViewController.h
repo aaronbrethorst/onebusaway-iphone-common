@@ -1,12 +1,12 @@
 @interface OBAListSelectionViewController : UITableViewController {
 	NSArray * _values;
 	NSIndexPath * _checkedItem;
-	id _target;
+	id __weak _target;
 	SEL _action;
 }
 
-@property (nonatomic,retain) NSIndexPath * checkedItem;
-@property (nonatomic,assign) id target;
+@property (nonatomic,strong) NSIndexPath * checkedItem;
+@property (nonatomic,weak) id target;
 @property (nonatomic) SEL action;
 
 @property (nonatomic) BOOL exitOnSelection;

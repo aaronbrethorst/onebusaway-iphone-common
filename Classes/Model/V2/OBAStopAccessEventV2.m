@@ -10,19 +10,13 @@
 - (id) initWithCoder:(NSCoder*)coder {
     self = [super init];
 	if( self ) {
-		self.title =  [[coder decodeObjectForKey:@"title"] retain];
-		self.subtitle =  [[coder decodeObjectForKey:@"subtitle"] retain];
-		self.stopIds =  [[coder decodeObjectForKey:@"stopIds"] retain];
+		self.title =  [coder decodeObjectForKey:@"title"];
+		self.subtitle =  [coder decodeObjectForKey:@"subtitle"];
+		self.stopIds =  [coder decodeObjectForKey:@"stopIds"];
 	}
 	return self;
 }
 
-- (void) dealloc {
-    self.title = nil;
-    self.subtitle = nil;
-    self.stopIds = nil;
-    [super dealloc];
-}
 #pragma mark NSCoder Methods
 
 - (void) encodeWithCoder: (NSCoder *)coder {

@@ -8,18 +8,18 @@
 	NSMutableArray * _situationIds;
 }
 
-@property (nonatomic,retain) NSString * tripId;
-@property (nonatomic,readonly) OBATripV2 * trip;
+@property (nonatomic,strong) NSString * tripId;
+@property (weak, nonatomic,readonly) OBATripV2 * trip;
 
 @property (nonatomic) long long serviceDate;
 
-@property (nonatomic,readonly) OBATripInstanceRef * tripInstance;
+@property (weak, nonatomic,readonly) OBATripInstanceRef * tripInstance;
 
-@property (nonatomic,retain) OBATripScheduleV2 * schedule;
-@property (nonatomic,retain) OBATripStatusV2 * status;
+@property (nonatomic,strong) OBATripScheduleV2 * schedule;
+@property (nonatomic,strong) OBATripStatusV2 * status;
 
-@property (nonatomic,readonly) NSArray * situationIds;
-@property (nonatomic,readonly) NSArray * situations;
+@property (weak, nonatomic,readonly) NSArray * situationIds;
+@property (weak, nonatomic,readonly) NSArray * situations;
 
 - (void) addSituationId:(NSString*)situationId;
 

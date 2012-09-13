@@ -17,12 +17,6 @@
 	return self;
 }
 
--(void) dealloc {
-	self.stopId = nil;
-	[_arrivalsAndDepartures release];
-	[_situationIds release];
-	[super dealloc];
-}
 
 -(OBAStopV2*) stop {
 	OBAReferencesV2 * refs = [self references];

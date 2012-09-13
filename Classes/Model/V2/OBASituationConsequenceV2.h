@@ -2,7 +2,7 @@
 
 }
 
-@property (nonatomic,retain) NSString * condition;
-@property (nonatomic,retain) NSString * diversionPath;
+@property (nonatomic,strong) NSString * condition;
+@property (nonatomic,strong) NSString * diversionPath;
 
 @end

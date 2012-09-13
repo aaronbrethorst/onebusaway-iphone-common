@@ -37,15 +37,15 @@
 	OBALocationManager * _locationManager;
 }
 
-@property (nonatomic,retain) OBAReferencesV2 * references;
-@property (nonatomic,retain) OBAModelDAO * modelDao;
-@property (nonatomic,retain) OBAModelFactory * modelFactory;
-@property (nonatomic,retain) OBAJsonDataSource * obaJsonDataSource;
-@property (nonatomic,retain) OBAJsonDataSource * googleMapsJsonDataSource;
-@property (nonatomic,retain) OBAJsonDataSource * googlePlacesJsonDataSource;
-@property (nonatomic,retain) OBALocationManager * locationManager;
+@property (nonatomic,strong) OBAReferencesV2 * references;
+@property (nonatomic,strong) OBAModelDAO * modelDao;
+@property (nonatomic,strong) OBAModelFactory * modelFactory;
+@property (nonatomic,strong) OBAJsonDataSource * obaJsonDataSource;
+@property (nonatomic,strong) OBAJsonDataSource * googleMapsJsonDataSource;
+@property (nonatomic,strong) OBAJsonDataSource * googlePlacesJsonDataSource;
+@property (nonatomic,strong) OBALocationManager * locationManager;
 
-@property (nonatomic,retain) NSData * deviceToken;
+@property (nonatomic,strong) NSData * deviceToken;
 
 
 - (id<OBAModelServiceRequest>) requestStopForId:(NSString*)stopId withDelegate:(id<OBAModelServiceDelegate>)delegate withContext:(id)context;

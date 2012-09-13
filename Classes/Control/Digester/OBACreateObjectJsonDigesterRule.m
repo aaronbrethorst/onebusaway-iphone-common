@@ -39,7 +39,6 @@
 	if([self shouldDigestValue:value]) {
 		id obj = [[_objectClass alloc] init];
 		[context pushValue:obj];
-		[obj release];
 		if( context.verbose )
 			OBALogDebug(@"Creating object: class=%@",[_objectClass description]);
 	}

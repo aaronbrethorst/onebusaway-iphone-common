@@ -3,8 +3,8 @@
 	UISwitch * _toggleSwitch;
 }
 
-@property (nonatomic,retain) IBOutlet UILabel * label;
-@property (nonatomic,retain) IBOutlet UISwitch * toggleSwitch;
+@property (nonatomic,strong) IBOutlet UILabel * label;
+@property (nonatomic,strong) IBOutlet UISwitch * toggleSwitch;
 
 + (OBALabelAndSwitchTableViewCell*) getOrCreateCellForTableView:(UITableView*)tableView;
 

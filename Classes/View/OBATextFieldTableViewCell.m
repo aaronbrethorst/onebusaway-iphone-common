@@ -36,10 +36,6 @@
 	return cell;	
 }
 
-- (void)dealloc {
-	[_textField release];
-    [super dealloc];
-}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)localTextField {	
 	

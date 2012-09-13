@@ -9,14 +9,6 @@
 @synthesize routeType;
 @synthesize agencyId;
 
-- (void) dealloc {
-	self.routeId = nil;
-	self.shortName = nil;
-	self.longName = nil;
-	self.routeType = nil;
-	self.agencyId = nil;
-	[super dealloc];
-}
 
 - (OBAAgencyV2*) agency {
 	OBAReferencesV2 * refs = [self references];

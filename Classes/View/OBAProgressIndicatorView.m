@@ -40,13 +40,6 @@
 	return self;
 }
 
-- (void)dealloc {
-	[_label release];
-	[_progressLabel release];
-	[_activityIndicator release];
-	[_progressView release];
-    [super dealloc];
-}
 
 - (void) setMessage:(NSString*)message inProgress:(BOOL)inProgress progress:(float)progress {
 

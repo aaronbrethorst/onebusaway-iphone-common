@@ -23,19 +23,13 @@
 
 - (id) initWithEntityName:(NSString*)entityName entityIdProperty:(NSString*)entityIdProperty jsonIdProperty:(NSString*)jsonIdProperty {
 	if( self = [super init] ) {
-		_entityName = [entityName retain];
-		_entityIdProperty = [entityIdProperty retain];
-		_jsonIdProperty = [jsonIdProperty retain];
+		_entityName = entityName;
+		_entityIdProperty = entityIdProperty;
+		_jsonIdProperty = jsonIdProperty;
 	}
 	return self;
 }
 
-- (void) dealloc {
-	[_entityName release];
-	[_entityIdProperty release];
-	[_jsonIdProperty release];
-	[super dealloc];
-}
 
 #pragma mark OBAJsonDigesterRule Methods
 

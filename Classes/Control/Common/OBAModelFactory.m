@@ -102,21 +102,16 @@ static NSString * const kReferences = @"references";
     self = [super init];
     
 	if( self ) {
-		_references = [references retain];
+		_references = references;
 		_entityIdMappings = [[NSMutableDictionary alloc] init];
 	}
 	return self;
 }
 
-- (void) dealloc {
-	[_references release];
-	[_entityIdMappings release];
-	[super dealloc];
-}
 
 - (OBAEntryWithReferencesV2*) getStopFromJSON:(NSDictionary*)jsonDictionary error:(NSError**)error {
 
-	OBAEntryWithReferencesV2 * entry = [[[OBAEntryWithReferencesV2 alloc] initWithReferences:_references] autorelease];
+	OBAEntryWithReferencesV2 * entry = [[OBAEntryWithReferencesV2 alloc] initWithReferences:_references];
 	
 	OBAJsonDigester * digester = [[OBAJsonDigester alloc] init];
 	[digester addReferencesRulesWithPrefix:@"/references"];
@@ -124,14 +119,13 @@ static NSString * const kReferences = @"references";
 	[digester addSetNext:@selector(setEntry:) forPrefix:@"/entry"];
 	
 	[digester parse:jsonDictionary withRoot:entry parameters:[self getDigesterParameters] error:error];
-	[digester release];
 	
 	return entry;
 }
 
 - (OBAListWithRangeAndReferencesV2*) getStopsV2FromJSON:(NSDictionary*)jsonDictionary error:(NSError**)error {
 	
-	OBAListWithRangeAndReferencesV2 * list = [[[OBAListWithRangeAndReferencesV2 alloc] initWithReferences:_references] autorelease];
+	OBAListWithRangeAndReferencesV2 * list = [[OBAListWithRangeAndReferencesV2 alloc] initWithReferences:_references];
 	
 	OBAJsonDigester * digester = [[OBAJsonDigester alloc] init];
 	[digester addReferencesRulesWithPrefix:@"/references"];
@@ -141,14 +135,13 @@ static NSString * const kReferences = @"references";
 	[digester addSetNext:@selector(addValue:) forPrefix:@"/list/[]"];
 	
 	[digester parse:jsonDictionary withRoot:list parameters:[self getDigesterParameters] error:error];
-	[digester release];
 	
 	return list;
 }
 
 - (OBAListWithRangeAndReferencesV2*) getRoutesV2FromJSON:(NSDictionary*)jsonDictionary error:(NSError**)error {
 	
-	OBAListWithRangeAndReferencesV2 * list = [[[OBAListWithRangeAndReferencesV2 alloc] initWithReferences:_references] autorelease];
+	OBAListWithRangeAndReferencesV2 * list = [[OBAListWithRangeAndReferencesV2 alloc] initWithReferences:_references];
 	
 	OBAJsonDigester * digester = [[OBAJsonDigester alloc] init];
 	[digester addReferencesRulesWithPrefix:@"/references"];
@@ -156,28 +149,26 @@ static NSString * const kReferences = @"references";
 	[digester addSetNext:@selector(addValue:) forPrefix:@"/list/[]"];
 	
 	[digester parse:jsonDictionary withRoot:list parameters:[self getDigesterParameters] error:error];
-	[digester release];
 	
 	return list;
 }
 
 - (OBAStopsForRouteV2*) getStopsForRouteV2FromJSON:(NSDictionary*)jsonDictionary error:(NSError**)error {
 
-	OBAStopsForRouteV2 * result = [[[OBAStopsForRouteV2 alloc] initWithReferences:_references] autorelease];
+	OBAStopsForRouteV2 * result = [[OBAStopsForRouteV2 alloc] initWithReferences:_references];
 	
 	OBAJsonDigester * digester = [[OBAJsonDigester alloc] init];
 	[digester addReferencesRulesWithPrefix:@"/references"];
 	[digester addCallMethodRule:@selector(addStopId:) forPrefix:@"/entry/stopIds/[]"];
 	[digester addCallMethodRule:@selector(addPolyline:) forPrefix:@"/entry/polylines/[]/points"];
 	[digester parse:jsonDictionary withRoot:result parameters:[self getDigesterParameters] error:error];
-	[digester release];
 	
 	return result;
 }
 
 - (OBAListWithRangeAndReferencesV2*) getAgenciesWithCoverageV2FromJson:(id)jsonDictionary error:(NSError**)error {
 	
-	OBAListWithRangeAndReferencesV2 * list = [[[OBAListWithRangeAndReferencesV2 alloc] initWithReferences:_references] autorelease];
+	OBAListWithRangeAndReferencesV2 * list = [[OBAListWithRangeAndReferencesV2 alloc] initWithReferences:_references];
 	
 	OBAJsonDigester * digester = [[OBAJsonDigester alloc] init];
 	[digester addReferencesRulesWithPrefix:@"/references"];
@@ -185,14 +176,13 @@ static NSString * const kReferences = @"references";
 	[digester addSetNext:@selector(addValue:) forPrefix:@"/list/[]"];
 	
 	[digester parse:jsonDictionary withRoot:list parameters:[self getDigesterParameters] error:error];
-	[digester release];
 	
 	return list;
 }
 
 - (OBAArrivalsAndDeparturesForStopV2*) getArrivalsAndDeparturesForStopV2FromJSON:(NSDictionary*)jsonDictionary error:(NSError**)error {
 
-	OBAArrivalsAndDeparturesForStopV2 * ads = [[[OBAArrivalsAndDeparturesForStopV2 alloc] initWithReferences:_references] autorelease];
+	OBAArrivalsAndDeparturesForStopV2 * ads = [[OBAArrivalsAndDeparturesForStopV2 alloc] initWithReferences:_references];
 	
 	OBAJsonDigester * digester = [[OBAJsonDigester alloc] init];
 	[digester addReferencesRulesWithPrefix:@"/references"];
@@ -202,14 +192,13 @@ static NSString * const kReferences = @"references";
 	[digester addCallMethodRule:@selector(addSituationId:) forPrefix:@"/entry/situationIds/[]"];
 	
 	[digester parse:jsonDictionary withRoot:ads parameters:[self getDigesterParameters] error:error];
-	[digester release];
 	
 	return ads;
 }
 
 - (OBAEntryWithReferencesV2*) getArrivalAndDepartureForStopV2FromJSON:(NSDictionary*)jsonDictionary error:(NSError**)error {
 	
-	OBAEntryWithReferencesV2 * entry = [[[OBAEntryWithReferencesV2 alloc] initWithReferences:_references] autorelease];
+	OBAEntryWithReferencesV2 * entry = [[OBAEntryWithReferencesV2 alloc] initWithReferences:_references];
 	
 	OBAJsonDigester * digester = [[OBAJsonDigester alloc] init];
 	[digester addReferencesRulesWithPrefix:@"/references"];
@@ -217,7 +206,6 @@ static NSString * const kReferences = @"references";
 	[digester addSetNext:@selector(setEntry:) forPrefix:@"/entry"];
 	
 	[digester parse:jsonDictionary withRoot:entry parameters:[self getDigesterParameters] error:error];
-	[digester release];
 	
 	return entry;
 }
@@ -234,17 +222,15 @@ static NSString * const kReferences = @"references";
 	OBASetCoordinatePropertyJsonDigesterRule * rule = [[OBASetCoordinatePropertyJsonDigesterRule alloc] initWithPropertyName:@"coordinate" method:OBASetCoordinatePropertyMethodArray];
     
 	[digester addRule:rule forPrefix:@"/Placemark/[]/Point/coordinates"];
-	[rule release];
 	
 	[digester parse:jsonObject withRoot:placemarks parameters:[self getDigesterParameters] error:error];
-	[digester release];
 	
 	return placemarks;
 }
 
 - (OBAPlacemarks*) getPlacemarksFromGooglePlacesJSONObject:(id)jsonObject error:(NSError**)error {
 
-    OBAPlacemarks * placemarks = [[[OBAPlacemarks alloc] init] autorelease];
+    OBAPlacemarks * placemarks = [[OBAPlacemarks alloc] init];
 	
 	OBAJsonDigester * digester = [[OBAJsonDigester alloc] init];
 	[digester addObjectCreateRule:[OBAPlacemark class] forPrefix:@"/results/[]"];
@@ -255,21 +241,19 @@ static NSString * const kReferences = @"references";
 	OBASetCoordinatePropertyJsonDigesterRule * rule = [[OBASetCoordinatePropertyJsonDigesterRule alloc] initWithPropertyName:@"coordinate" method:OBASetCoordinatePropertyMethodLatLon];
     rule.lonJsonName = @"lng";
 	[digester addRule:rule forPrefix:@"/results/[]/geometry/location"];
-	[rule release];
     
     [digester addSetNext:@selector(addPlacemark:) forPrefix:@"/results/[]"];
     
     [digester addCallMethodRule:@selector(addAttribution:) forPrefix:@"/html_attributions/[]"];
 	
 	[digester parse:jsonObject withRoot:placemarks parameters:[self getDigesterParameters] error:error];
-	[digester release];
 	
 	return placemarks;
 }
 
 - (OBAEntryWithReferencesV2*) getTripDetailsV2FromJSON:(NSDictionary*)json error:(NSError**)error {
 
-	OBAEntryWithReferencesV2 * entry = [[[OBAEntryWithReferencesV2 alloc] initWithReferences:_references] autorelease];
+	OBAEntryWithReferencesV2 * entry = [[OBAEntryWithReferencesV2 alloc] initWithReferences:_references];
 	
 	OBAJsonDigester * digester = [[OBAJsonDigester alloc] init];
 	[digester addReferencesRulesWithPrefix:@"/references"];
@@ -277,14 +261,13 @@ static NSString * const kReferences = @"references";
 	[digester addSetNext:@selector(setEntry:) forPrefix:@"/entry"];
 	
 	[digester parse:json withRoot:entry parameters:[self getDigesterParameters] error:error];
-	[digester release];
 	
 	return entry;
 }
 
 - (OBAEntryWithReferencesV2*) getVehicleStatusV2FromJSON:(NSDictionary*)json error:(NSError**)error {
 
-	OBAEntryWithReferencesV2 * entry = [[[OBAEntryWithReferencesV2 alloc] initWithReferences:_references] autorelease];
+	OBAEntryWithReferencesV2 * entry = [[OBAEntryWithReferencesV2 alloc] initWithReferences:_references];
 	
 	OBAJsonDigester * digester = [[OBAJsonDigester alloc] init];
 	[digester addReferencesRulesWithPrefix:@"/references"];
@@ -292,14 +275,13 @@ static NSString * const kReferences = @"references";
 	[digester addSetNext:@selector(setEntry:) forPrefix:@"/entry"];
 	
 	[digester parse:json withRoot:entry parameters:[self getDigesterParameters] error:error];
-	[digester release];
 	
 	return entry;
 }
 
 - (OBAListWithRangeAndReferencesV2*) getCurrentVehicleEstimatesV2FromJSON:(NSDictionary*)jsonDictionary error:(NSError**)error {
         
-    OBAListWithRangeAndReferencesV2 * list = [[[OBAListWithRangeAndReferencesV2 alloc] initWithReferences:_references] autorelease];
+    OBAListWithRangeAndReferencesV2 * list = [[OBAListWithRangeAndReferencesV2 alloc] initWithReferences:_references];
 	
 	OBAJsonDigester * digester = [[OBAJsonDigester alloc] init];
 	[digester addReferencesRulesWithPrefix:@"/references"];
@@ -308,14 +290,13 @@ static NSString * const kReferences = @"references";
 	[digester addSetNext:@selector(addValue:) forPrefix:@"/list/[]"];
 	
 	[digester parse:jsonDictionary withRoot:list parameters:[self getDigesterParameters] error:error];
-	[digester release];
 	
 	return list;
 }
 
 - (OBAEntryWithReferencesV2*) getItinerariesV2FromJSON:(NSDictionary*)json error:(NSError**)error {
     
-    OBAEntryWithReferencesV2 * entry = [[[OBAEntryWithReferencesV2 alloc] initWithReferences:_references] autorelease];
+    OBAEntryWithReferencesV2 * entry = [[OBAEntryWithReferencesV2 alloc] initWithReferences:_references];
 	
 	OBAJsonDigester * digester = [[OBAJsonDigester alloc] init];
 	[digester addReferencesRulesWithPrefix:@"/references"];
@@ -323,7 +304,6 @@ static NSString * const kReferences = @"references";
 	[digester addSetNext:@selector(setEntry:) forPrefix:@"/entry"];
 	
 	[digester parse:json withRoot:entry parameters:[self getDigesterParameters] error:error];
-	[digester release];
 	
 	return entry;
 
@@ -687,19 +667,16 @@ static NSString * const kReferences = @"references";
 - (void) addSetCoordinatePropertyRule:(NSString*)propertyName withPrefix:(NSString*)prefix method:(OBASetCoordinatePropertyMethod)method {
 	OBASetCoordinatePropertyJsonDigesterRule * rule = [[OBASetCoordinatePropertyJsonDigesterRule alloc] initWithPropertyName:propertyName method:method];
 	[self addRule:rule forPrefix:prefix];
-	[rule release];
 }
 
 - (void) addSetLocationPropertyRule:(NSString*)propertyName withPrefix:(NSString*)prefix {
 	OBASetLocationPropertyJsonDigesterRule * rule = [[OBASetLocationPropertyJsonDigesterRule alloc] initWithPropertyName:propertyName];
 	[self addRule:rule forPrefix:prefix];
-	[rule release];	
 }
 
 - (void) addSetDatePropertyRule:(NSString*)propertyName withPrefix:(NSString*)prefix {
     OBASetDatePropertyJsonDigesterRule * rule = [[OBASetDatePropertyJsonDigesterRule alloc] initWithPropertyName:propertyName];
     [self addRule:rule forPrefix:prefix];
-    [rule release];
 }
 
 @end 

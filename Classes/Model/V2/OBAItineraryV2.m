@@ -19,17 +19,6 @@
     return self;
 }
 
--(void) dealloc {
-    
-    self.startTime = nil;
-    self.endTime = nil;
-    self.rawData = nil;
-    
-    [_legs release];
-    _legs = nil;
-    
-    [super dealloc];
-}
 
 - (void) addLeg:(OBALegV2*)leg {
     [_legs addObject:leg];

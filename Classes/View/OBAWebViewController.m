@@ -23,9 +23,6 @@
 	return controller;
 }
 
-- (void)dealloc {
-    [super dealloc];
-}
 
 #pragma mark UIViewController
 

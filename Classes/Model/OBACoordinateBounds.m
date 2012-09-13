@@ -67,7 +67,7 @@
 }
 
 + (id) bounds {
-	return [[[OBACoordinateBounds alloc] init] autorelease];
+	return [[OBACoordinateBounds alloc] init];
 }
 
 - (MKCoordinateRegion) region {

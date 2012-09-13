@@ -23,7 +23,7 @@
 - (id) initWithApplicationContext:(OBAApplicationContext*)appContext { 
     self = [super initWithStyle:UITableViewStyleGrouped];
 	if (self) {
-		_appContext = [appContext retain];
+		_appContext = appContext;
 		CGRect r = CGRectMake(0, 0, 160, 33);
 		_progressView = [[OBAProgressIndicatorView alloc] initWithFrame:r];
 		[self.navigationItem setTitleView:_progressView];
@@ -35,10 +35,6 @@
 
 - (void)dealloc {
 	[self clearPendingRequest];
-	[_appContext release];
-	[_progressView release];
-	[_progressLabel release];
-    [super dealloc];
 }
 
 - (BOOL) refreshable {
@@ -51,7 +47,6 @@
 	if( _refreshable ) {
 		UIBarButtonItem * refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(onRefreshButton:)];
 		[self.navigationItem setRightBarButtonItem:refreshItem];
-		[refreshItem release];
 	}
 	else {
 		[self.navigationItem setRightBarButtonItem:nil];
@@ -75,7 +70,7 @@
 	[_progressView setMessage:@"Updating..." inProgress:TRUE progress:0];
 	[self didRefreshBegin];
 	[self clearPendingRequest];
-	_request = [[self handleRefresh] retain];
+	_request = [self handleRefresh];
 	[self checkTimer];
 }
 
@@ -178,11 +173,9 @@
 
 - (void) clearPendingRequest {
 	[_timer invalidate];
-	[_timer release];
 	_timer = nil;
 	
 	[_request cancel];
-	[_request release];
 	_request = nil;
 }
 
@@ -192,11 +185,10 @@
 
 - (void) checkTimer {
 	if( _refreshInterval > 0 ) {
-		_timer = [[NSTimer scheduledTimerWithTimeInterval:_refreshInterval target:self selector:@selector(refresh) userInfo:nil repeats:TRUE] retain];
+		_timer = [NSTimer scheduledTimerWithTimeInterval:_refreshInterval target:self selector:@selector(refresh) userInfo:nil repeats:TRUE];
 	}
 	else {
 		[_timer invalidate];
-		[_timer release];
 		_timer = nil;
 	}
 }

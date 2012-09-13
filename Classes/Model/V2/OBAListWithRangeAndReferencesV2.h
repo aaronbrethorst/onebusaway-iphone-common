@@ -9,7 +9,7 @@
 
 @property (nonatomic) BOOL limitExceeded;
 @property (nonatomic) BOOL outOfRange;
-@property (nonatomic,retain) NSArray * values;
+@property (nonatomic,strong) NSArray * values;
 
 @property (nonatomic,readonly) NSUInteger count;
 

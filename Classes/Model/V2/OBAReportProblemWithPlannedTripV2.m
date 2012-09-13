@@ -11,14 +11,5 @@
 @synthesize userComment;
 @synthesize userLocation;
 
-- (void) dealloc {
-    self.fromLocation = nil;
-    self.toLocation = nil;
-    self.time = nil;
-    self.data = nil;
-    self.userComment = nil;
-    self.userLocation = nil;
-    [super dealloc];
-}
 
 @end

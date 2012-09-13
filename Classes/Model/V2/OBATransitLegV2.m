@@ -20,18 +20,6 @@
 @synthesize scheduledArrivalTime;
 @synthesize predictedArrivalTime;
 
-- (void) dealloc {
-    self.tripId = nil;
-    self.vehicleId = nil;
-    self.frequency = nil;
-    self.fromStopId = nil;
-    self.toStopId = nil;
-    self.tripHeadsign = nil;
-    self.routeShortName = nil;
-    self.routeLongName = nil;
-    self.path = nil;    
-    [super dealloc];
-}
 
 - (OBATripV2*) trip {
     OBAReferencesV2 * refs = self.references;

@@ -13,17 +13,12 @@
 
 - (id)initWithValues:(NSArray*)values selectedIndex:(NSIndexPath*)selectedIndex {
     if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
-		_values = [values retain];
-		_checkedItem = [selectedIndex retain];
+		_values = values;
+		_checkedItem = selectedIndex;
     }
     return self;
 }
 
-- (void)dealloc {
-	[_values release];
-	[_checkedItem release];
-    [super dealloc];
-}
 
 
 #pragma mark Table view data source

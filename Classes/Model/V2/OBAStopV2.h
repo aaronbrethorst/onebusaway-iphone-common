@@ -6,15 +6,15 @@
 }
 
 
-@property (nonatomic, retain) NSString * stopId;
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * code;
-@property (nonatomic, retain) NSString * direction;
-@property (nonatomic, retain) NSNumber * latitude;
-@property (nonatomic, retain) NSNumber * longitude;
-@property (nonatomic, retain) NSArray * routeIds;
+@property (nonatomic, strong) NSString * stopId;
+@property (nonatomic, strong) NSString * name;
+@property (nonatomic, strong) NSString * code;
+@property (nonatomic, strong) NSString * direction;
+@property (nonatomic, strong) NSNumber * latitude;
+@property (nonatomic, strong) NSNumber * longitude;
+@property (nonatomic, strong) NSArray * routeIds;
 
-@property (nonatomic,readonly) NSArray * routes;
+@property (weak, nonatomic,readonly) NSArray * routes;
 
 @property (nonatomic,readonly) double lat;
 @property (nonatomic,readonly) double lon;

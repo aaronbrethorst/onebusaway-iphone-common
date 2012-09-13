@@ -12,25 +12,25 @@
 	NSMutableArray * _situationIds;
 }
 
-@property (nonatomic,retain) NSString * routeId;
-@property (nonatomic,readonly) OBARouteV2 * route;
-@property (nonatomic,retain) NSString * routeShortName;
+@property (nonatomic,strong) NSString * routeId;
+@property (weak, nonatomic,readonly) OBARouteV2 * route;
+@property (nonatomic,strong) NSString * routeShortName;
 
-@property (nonatomic,retain) NSString * tripId;
-@property (nonatomic,readonly) OBATripV2 * trip;
-@property (nonatomic,retain) NSString * tripHeadsign;
+@property (nonatomic,strong) NSString * tripId;
+@property (weak, nonatomic,readonly) OBATripV2 * trip;
+@property (nonatomic,strong) NSString * tripHeadsign;
 @property (nonatomic) long long serviceDate;
 
-@property (nonatomic,readonly) OBAArrivalAndDepartureInstanceRef * instance;
-@property (nonatomic,readonly) OBATripInstanceRef * tripInstance;
+@property (weak, nonatomic,readonly) OBAArrivalAndDepartureInstanceRef * instance;
+@property (weak, nonatomic,readonly) OBATripInstanceRef * tripInstance;
 
-@property (nonatomic,retain) NSString * stopId;
-@property (nonatomic,readonly) OBAStopV2 * stop;
+@property (nonatomic,strong) NSString * stopId;
+@property (weak, nonatomic,readonly) OBAStopV2 * stop;
 @property (nonatomic) NSInteger stopSequence;
 
-@property (nonatomic,retain) OBATripStatusV2 * tripStatus;
+@property (nonatomic,strong) OBATripStatusV2 * tripStatus;
 
-@property (nonatomic,retain) OBAFrequencyV2 * frequency;
+@property (nonatomic,strong) OBAFrequencyV2 * frequency;
 
 @property (nonatomic) BOOL predicted;
 
@@ -45,7 +45,7 @@
 @property (nonatomic) double distanceFromStop;
 
 @property (nonatomic,readonly) NSArray * situationIds;
-@property (nonatomic,readonly) NSArray * situations;
+@property (weak, nonatomic,readonly) NSArray * situations;
 
 - (void) addSituationId:(NSString*)situationId;
 

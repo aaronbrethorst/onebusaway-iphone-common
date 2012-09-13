@@ -62,10 +62,6 @@
 	return self;
 }
 
-- (void) dealloc {
-	[_rulesByPrefix release];
-	[super dealloc];
-}
 
 - (void) addRule:(id<OBAJsonDigesterRule>)rule forPrefix:(NSString*)prefix {
 	NSMutableArray * rules = _rulesByPrefix[prefix];
@@ -79,46 +75,39 @@
 - (void) addObjectCreateRule:(Class)objectClass forPrefix:(NSString*)prefix {
 	OBACreateObjectJsonDigesterRule * rule = [[OBACreateObjectJsonDigesterRule alloc] initWithObjectClass:objectClass];
 	[self addRule:rule forPrefix:prefix];
-	[rule release];
 }
 
 - (void) addCallMethodRule:(SEL)selector forPrefix:(NSString*)prefix {
 	OBACallMethodJsonDigesterRule * rule = [[OBACallMethodJsonDigesterRule alloc] initWithSelector:selector];
 	[self addRule:rule forPrefix:prefix];
-	[rule release];
 }
 
 - (void) addSetPropertyRule:(NSString*)property forPrefix:(NSString*)prefix {
 	OBASetPropertyJsonDigesterRule * rule = [[OBASetPropertyJsonDigesterRule alloc] initWithPropertyName:property];
 	[self addRule:rule forPrefix:prefix];
-	[rule release];
 }
 
 - (void) addSetOptionalPropertyRule:(NSString*)property forPrefix:(NSString*)prefix {
 	OBASetPropertyJsonDigesterRule * rule = [[OBASetPropertyJsonDigesterRule alloc] initWithPropertyName:property];
 	rule.optional = TRUE;
 	[self addRule:rule forPrefix:prefix];
-	[rule release];
 }
 
 
 - (void) addSetPropertyIfNeededRule:(NSString*)property forPrefix:(NSString*)prefix {
 	OBASetPropertyJsonDigesterRule * rule = [[OBASetPropertyJsonDigesterRule alloc] initWithPropertyName:property onlyIfNeeded:TRUE];
 	[self addRule:rule forPrefix:prefix];
-	[rule release];
 	
 }
 
 - (void) addSetNext:(SEL)selector forPrefix:(NSString*)prefix {
 	OBASetNextOBAJsonDigesterRule * rule = [[OBASetNextOBAJsonDigesterRule alloc] initWithSelector:selector];
 	[self addRule:rule forPrefix:prefix];
-	[rule release];
 }
 
 - (void) addTarget:(NSObject*)target selector:(SEL)selector forRuleTarget:(OBAJsonDigesterRuleTarget)ruleTarget prefix:(NSString*)prefix {
 	OBASelectorJsonDigesterRule * rule = [[OBASelectorJsonDigesterRule alloc] initWithTarget:target selector:selector ruleTarget:ruleTarget];
 	[self addRule:rule forPrefix:prefix];
-	[rule release];
 }
 
 - (void) parse:(id)jsonRoot withRoot:(id)rootObject error:(NSError**)error {
@@ -142,7 +131,6 @@
 	if( err && error )
 		(*error) = err;
 	
-	[context release];
 }
 
 -(NSString*) extendPrefix:(NSString*)prefix withValue:(NSString*)value {
@@ -237,12 +225,6 @@
 	return self;
 }
 
-- (void) dealloc {
-	[_stack release];
-	[_parameters release];
-	[_error release];
-	[super dealloc];
-}
 
 -(void) pushValue:(id)value {
 	[_stack addObject:value];

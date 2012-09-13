@@ -6,18 +6,18 @@
 
 }
 
-@property (nonatomic, retain) NSString * tripId;
-@property (nonatomic, retain) NSString * routeId;
-@property (nonatomic, retain) NSString * routeShortName;
-@property (nonatomic, retain) NSString * tripShortName;
-@property (nonatomic, retain) NSString * tripHeadsign;
-@property (nonatomic, retain) NSString * serviceId;
-@property (nonatomic, retain) NSString * shapeId;
-@property (nonatomic, retain) NSString * directionId;
-@property (nonatomic, retain) NSString * blockId;
+@property (nonatomic, strong) NSString * tripId;
+@property (nonatomic, strong) NSString * routeId;
+@property (nonatomic, strong) NSString * routeShortName;
+@property (nonatomic, strong) NSString * tripShortName;
+@property (nonatomic, strong) NSString * tripHeadsign;
+@property (nonatomic, strong) NSString * serviceId;
+@property (nonatomic, strong) NSString * shapeId;
+@property (nonatomic, strong) NSString * directionId;
+@property (nonatomic, strong) NSString * blockId;
 
-@property (nonatomic, readonly) OBARouteV2 * route;
+@property (weak, nonatomic, readonly) OBARouteV2 * route;
 
-@property (nonatomic, readonly) NSString * asLabel;
+@property (weak, nonatomic, readonly) NSString * asLabel;
 
 @end

@@ -41,7 +41,7 @@ static const BOOL kUseLocationTraceInSimulator = FALSE;
 
 - (id) initWithModelDao:(OBAModelDAO*)modelDao {
 	if( self = [super init]) {
-		_modelDao = [modelDao retain];
+		_modelDao = modelDao;
 		_disabled = FALSE;
 		_locationManager = [[CLLocationManager alloc] init];
 		_locationManager.delegate = self;
@@ -55,17 +55,6 @@ static const BOOL kUseLocationTraceInSimulator = FALSE;
 	return self;
 }
 
--(void) dealloc {
-	
-#if TARGET_IPHONE_SIMULATOR
-	[_locationTrace release];
-#endif
-	
-	[_locationManager release];
-	[_delegates release];
-	[_modelDao release];
-	[super dealloc];
-}
 
 - (BOOL) locationServicesEnabled {
 	if( _disabled )
@@ -114,7 +103,7 @@ static const BOOL kUseLocationTraceInSimulator = FALSE;
 		
 		NSBundle *bundle = [NSBundle mainBundle];
 		NSString * path = [bundle pathForResource:@"LocationTrace" ofType:@"plist"];
-		_locationTrace = [[NSArray arrayWithContentsOfFile:path] retain];
+		_locationTrace = [NSArray arrayWithContentsOfFile:path];
 		_locationTraceIndex = 0;
 		[self handleSimulatedLocationTrace];
 		return;
@@ -123,7 +112,7 @@ static const BOOL kUseLocationTraceInSimulator = FALSE;
          
         //newLocation = [[[CLLocation alloc] initWithLatitude:47.677553240051175 longitude: -122.31267894201659] autorelease]; // Roosevelt HS
 		//newLocation = [[[CLLocation alloc] initWithLatitude:47.66869649992775  longitude:-122.377610206604] autorelease]; // Ballard
-		newLocation = [[[CLLocation alloc] initWithLatitude:  47.653435121376894 longitude: -122.3056411743164] autorelease]; // UW CSE
+		newLocation = [[CLLocation alloc] initWithLatitude:  47.653435121376894 longitude: -122.3056411743164]; // UW CSE
 		//newLocation = [[[CLLocation alloc] initWithLatitude:  47.60983759756863 longitude: -122.33782768249512] autorelease];		
 	}
 	

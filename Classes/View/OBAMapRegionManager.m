@@ -47,7 +47,7 @@ typedef enum  {
 - (id) initWithMapView:(MKMapView*)mapView {
     self = [super init];
     if (self) {
-        _mapView = [mapView retain];
+        _mapView = mapView;
         _lastRegionChangeWasProgramatic = FALSE;
         _currentlyChangingRegion = FALSE;
         _pendingRegionChangeRequest = nil;
@@ -56,12 +56,6 @@ typedef enum  {
     return self;
 }
 
-- (void) dealloc {
-    [_mapView release];
-    [_pendingRegionChangeRequest release];
-    [_appliedRegionChangeRequests release];
-    [super dealloc];
-}
 
 - (void) setRegion:(MKCoordinateRegion)region {
     [self setMapRegion:region requestType:OBARegionChangeRequestTypeProgramatic];
@@ -127,7 +121,6 @@ typedef enum  {
     
     OBARegionChangeRequest * request = [[OBARegionChangeRequest alloc] initWithRegion:region type:requestType];
     [self setMapRegionWithRequest:request];
-    [request release];
 }
 
 - (void) setMapRegionWithRequest:(OBARegionChangeRequest*)request {
@@ -172,7 +165,6 @@ typedef enum  {
     
     _appliedRegionChangeRequests = [NSObject releaseOld:_appliedRegionChangeRequests retainNew:requests];
     
-    [requests release];
     
     return bestRequest;
 }
@@ -199,10 +191,6 @@ typedef enum  {
     return self;
 }
 
--(void) dealloc {
-    [_timestamp release];
-	[super dealloc];
-}
 
 - (double) compareRegion:(MKCoordinateRegion)region {
 	return [OBASphericalGeometryLibrary getDistanceFromRegion:_region toRegion:region];

@@ -58,8 +58,8 @@ typedef struct {
 }
 
 + (CLLocationDistance) getDistanceFromRegion:(MKCoordinateRegion)regionA toRegion:(MKCoordinateRegion)regionB {
-	CLLocation * a = [[[CLLocation alloc] initWithLatitude:regionA.center.latitude longitude:regionA.center.longitude] autorelease];
-	CLLocation * b = [[[CLLocation alloc] initWithLatitude:regionB.center.latitude longitude:regionB.center.longitude] autorelease];
+	CLLocation * a = [[CLLocation alloc] initWithLatitude:regionA.center.latitude longitude:regionA.center.longitude];
+	CLLocation * b = [[CLLocation alloc] initWithLatitude:regionB.center.latitude longitude:regionB.center.longitude];
 	return [a distanceFromLocation:b];
 }
 
@@ -120,7 +120,6 @@ typedef struct {
 		
 		CLLocation * loc = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
 		[points addObject:loc];
-		[loc release];
     }
 	
     return points;
@@ -166,7 +165,7 @@ typedef struct {
 
 + (OBACoordinateBounds*) boundsForLocations:(NSArray*)locations {
 
-	OBACoordinateBounds * bounds = [[[OBACoordinateBounds alloc] init] autorelease];
+	OBACoordinateBounds * bounds = [[OBACoordinateBounds alloc] init];
 	
 	for( CLLocation * location in locations) {
 		CLLocationCoordinate2D p = location.coordinate;
@@ -178,7 +177,7 @@ typedef struct {
 
 + (OBACoordinateBounds*) boundsForMKPolyline:(MKPolyline*)polyline {
 	
-	OBACoordinateBounds * bounds = [[[OBACoordinateBounds alloc] init] autorelease];
+	OBACoordinateBounds * bounds = [[OBACoordinateBounds alloc] init];
 	
 	MKMapPoint * points = polyline.points;
 	for( int i=0; i<polyline.pointCount; i++ ) {

@@ -27,7 +27,7 @@
 -(id) initWithAddress:(NSString*)address coordinate:(CLLocationCoordinate2D)coordinate {
     self = [super init];
 	if( self ) {
-		_address = [address retain];
+		_address = address;
 		_coordinate = coordinate;
 	}
 	return self;
@@ -36,24 +36,18 @@
 - (id) initWithCoder:(NSCoder*)coder {
     self = [super init];
 	if( self ) {
-        _name = [[coder decodeObjectForKey:@"name"] retain];
-		_address =  [[coder decodeObjectForKey:@"address"] retain];
-        _icon =  [[coder decodeObjectForKey:@"icon"] retain];
+        _name = [coder decodeObjectForKey:@"name"];
+		_address =  [coder decodeObjectForKey:@"address"];
+        _icon =  [coder decodeObjectForKey:@"icon"];
 		NSData * data = [coder decodeObjectForKey:@"coordinate"];
 		[data getBytes:&_coordinate];
 	}
 	return self;
 }
 
-- (void) dealloc {
-    [_name release];
-	[_address release];
-    [_icon release];
-	[super dealloc];
-}
 
 - (CLLocation*) location {
-    return [[[CLLocation alloc] initWithLatitude:_coordinate.latitude longitude:_coordinate.longitude] autorelease];
+    return [[CLLocation alloc] initWithLatitude:_coordinate.latitude longitude:_coordinate.longitude];
 }
 
 #pragma mark MKAnnotation

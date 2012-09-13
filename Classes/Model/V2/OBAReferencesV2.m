@@ -20,14 +20,6 @@
 	return self;
 }
 
-- (void) dealloc {
-	[_agencies release];
-	[_routes release];
-	[_stops release];
-	[_trips release];
-	[_situations release];
-	[super dealloc];
-}
 
 - (void) addAgency:(OBAAgencyV2*)agency {
 	_agencies[agency.agencyId] = agency;

@@ -87,7 +87,6 @@
 	}
 	[controllers addObject:controller];
 	[self setViewControllers:controllers animated:animated];
-	[controllers release];
 }
 
 -(void) popToRootViewController {
@@ -108,7 +107,7 @@
 	
 	// If no cell is available, create a new one using the given identifier
 	if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
 	}
 	
 	return cell;
@@ -131,7 +130,7 @@
 	
 	// If no cell is available, create a new one using the given identifier
 	if (cell == nil)
-		cell = [[[UITableViewCell alloc] initWithStyle:style reuseIdentifier:cellId] autorelease];
+		cell = [[UITableViewCell alloc] initWithStyle:style reuseIdentifier:cellId];
     
 	return cell;
 }

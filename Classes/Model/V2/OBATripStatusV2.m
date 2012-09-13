@@ -14,14 +14,6 @@
 @synthesize lastUpdateTime;
 @synthesize lastKnownLocation;
 
-- (void) dealloc {
-	self.activeTripId = nil;
-	self.frequency = nil;
-	self.location = nil;
-	self.vehicleId = nil;
-	self.lastKnownLocation = nil;
-	[super dealloc];
-}
 
 - (OBATripV2*) activeTrip {
 	OBAReferencesV2 * refs = self.references;

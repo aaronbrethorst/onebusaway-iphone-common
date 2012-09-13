@@ -5,16 +5,16 @@
 
 }
 
-@property (nonatomic,retain) NSString * situationId;
+@property (nonatomic,strong) NSString * situationId;
 @property (nonatomic) long long creationTime;
 
-@property (nonatomic,retain) NSString * summary;
-@property (nonatomic,retain) NSString * description;
-@property (nonatomic,retain) NSString * advice;
+@property (nonatomic,strong) NSString * summary;
+@property (nonatomic,strong) NSString * description;
+@property (nonatomic,strong) NSString * advice;
 
-@property (nonatomic,retain) NSArray * consequences;
+@property (nonatomic,strong) NSArray * consequences;
 
-@property (nonatomic,retain) NSString * severity;
-@property (nonatomic,retain) NSString * sensitivity;
+@property (nonatomic,strong) NSString * severity;
+@property (nonatomic,strong) NSString * sensitivity;
 
 @end

@@ -8,11 +8,11 @@
 	NSMutableArray * _situationIds;
 }
 
-@property (nonatomic,retain) NSString * stopId;
-@property (nonatomic,readonly) OBAStopV2 * stop;
+@property (nonatomic,strong) NSString * stopId;
+@property (weak, nonatomic,readonly) OBAStopV2 * stop;
 @property (nonatomic,readonly) NSArray * arrivalsAndDepartures;
 @property (nonatomic,readonly) NSArray * situationIds;
-@property (nonatomic,readonly) NSArray * situations;
+@property (weak, nonatomic,readonly) NSArray * situations;
 
 - (void) addArrivalAndDeparture:(OBAArrivalAndDepartureV2*)arrivalAndDeparture;
 - (void) addSituationId:(NSString*)situationId;

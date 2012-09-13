@@ -40,11 +40,6 @@
 	return self;
 }
 
-- (void) dealloc {
-    self.latJsonName = nil;
-    self.lonJsonName = nil;
-    [super dealloc];
-}
 
 - (void) begin:(id<OBAJsonDigesterContext>)context name:(NSString*)name value:(id)value {
 	

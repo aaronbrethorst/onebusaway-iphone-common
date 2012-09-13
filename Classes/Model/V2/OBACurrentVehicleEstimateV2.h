@@ -6,7 +6,7 @@
 }
 
 @property (nonatomic) double probability;
-@property (nonatomic,retain) OBATripStatusV2 * tripStatus;
-@property (nonatomic,retain) NSString * debug;
+@property (nonatomic,strong) OBATripStatusV2 * tripStatus;
+@property (nonatomic,strong) NSString * debug;
 
 @end

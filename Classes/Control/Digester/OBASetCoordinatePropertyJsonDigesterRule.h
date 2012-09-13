@@ -28,7 +28,7 @@ OBASetCoordinatePropertyMethod;
 
 - (id) initWithPropertyName:(NSString*)propertyName method:(OBASetCoordinatePropertyMethod) method;
 
-@property (nonatomic,retain) NSString * latJsonName;
-@property (nonatomic,retain) NSString * lonJsonName;
+@property (nonatomic,strong) NSString * latJsonName;
+@property (nonatomic,strong) NSString * lonJsonName;
 
 @end

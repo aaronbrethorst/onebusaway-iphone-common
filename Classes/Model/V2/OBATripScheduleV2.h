@@ -7,14 +7,14 @@
 
 }
 
-@property (nonatomic,retain) NSString * timeZone;
-@property (nonatomic,retain) NSArray * stopTimes;
-@property (nonatomic,retain) OBAFrequencyV2 * frequency;
-@property (nonatomic,retain) NSString * previousTripId;
-@property (nonatomic,retain) NSString * nextTripId;
+@property (nonatomic,strong) NSString * timeZone;
+@property (nonatomic,strong) NSArray * stopTimes;
+@property (nonatomic,strong) OBAFrequencyV2 * frequency;
+@property (nonatomic,strong) NSString * previousTripId;
+@property (nonatomic,strong) NSString * nextTripId;
 
-@property (nonatomic,readonly) OBATripV2 * previousTrip;
-@property (nonatomic,readonly) OBATripV2 * nextTrip;
+@property (weak, nonatomic,readonly) OBATripV2 * previousTrip;
+@property (weak, nonatomic,readonly) OBATripV2 * nextTrip;
 
 
 

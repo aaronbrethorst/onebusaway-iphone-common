@@ -15,12 +15,6 @@
 	return self;
 }
 
-- (void) dealloc {
-	[_routeId release];
-	[_stopIds release];
-	[_polylines release];
-	[super dealloc];
-}
 
 - (void) addStopId:(NSString*)stopId {
 	[_stopIds addObject:stopId];
@@ -35,7 +29,7 @@
 }
 
 - (NSArray*) stops {
-	NSMutableArray * stops = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray * stops = [[NSMutableArray alloc] init];
 	OBAReferencesV2 * refs = [self references];
 	for( NSString * stopId in _stopIds ) {
 		OBAStopV2 * stop = [refs getStopForId:stopId];

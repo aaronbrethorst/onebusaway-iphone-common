@@ -5,8 +5,4 @@
 
 @synthesize entry = _entry;
 
-- (void) dealloc {
-	[_entry release];
-	[super dealloc];
-}
 @end

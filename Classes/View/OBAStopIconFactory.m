@@ -23,11 +23,6 @@
 	return self;
 }
 
-- (void) dealloc {
-	[_stopIcons release];
-	[_defaultStopIcon release];
-	[super dealloc];
-}
 
 - (UIImage*) getIconForStop:(OBAStopV2*)stop {
     return [self getIconForStop:stop includeDirection:TRUE];

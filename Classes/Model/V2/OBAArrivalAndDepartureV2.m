@@ -32,16 +32,6 @@
 	return self;
 }
 
-- (void) dealloc {
-    self.routeId = nil;
-    self.routeShortName = nil;
-    self.tripId = nil;
-    self.tripHeadsign = nil;
-    self.stopId = nil;
-    self.frequency = nil;
-	[_situationIds release];
-	[super dealloc];
-}
 
 - (OBARouteV2*) route {
 	OBAReferencesV2 * refs = [self references];

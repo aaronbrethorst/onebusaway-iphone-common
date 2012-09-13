@@ -8,18 +8,18 @@
     
 }
 
-@property (nonatomic,retain) NSString * tripId;
+@property (nonatomic,strong) NSString * tripId;
 @property (nonatomic) long long serviceDate;
-@property (nonatomic,retain) NSString * vehicleId;
-@property (nonatomic,retain) OBAFrequencyV2 * frequency;
-@property (nonatomic,retain) NSString * fromStopId;
+@property (nonatomic,strong) NSString * vehicleId;
+@property (nonatomic,strong) OBAFrequencyV2 * frequency;
+@property (nonatomic,strong) NSString * fromStopId;
 @property (nonatomic) NSInteger fromStopSequence;
-@property (nonatomic,retain) NSString * toStopId;
+@property (nonatomic,strong) NSString * toStopId;
 @property (nonatomic) NSInteger toStopSequence;
-@property (nonatomic,retain) NSString * tripHeadsign;
-@property (nonatomic,retain) NSString * routeShortName;
-@property (nonatomic,retain) NSString * routeLongName;
-@property (nonatomic,retain) NSString * path;
+@property (nonatomic,strong) NSString * tripHeadsign;
+@property (nonatomic,strong) NSString * routeShortName;
+@property (nonatomic,strong) NSString * routeLongName;
+@property (nonatomic,strong) NSString * path;
 @property (nonatomic) long long scheduledDepartureTime;
 @property (nonatomic) long long predictedDepartureTime;
 @property (nonatomic,readonly) long long bestDepartureTime;
@@ -27,13 +27,13 @@
 @property (nonatomic) long long predictedArrivalTime;
 @property (nonatomic,readonly) long long bestArrivalTime;
 
-@property (nonatomic,readonly) OBATripV2 * trip;
-@property (nonatomic,readonly) OBAStopV2 * fromStop;
-@property (nonatomic,readonly) OBAStopV2 * toStop;
+@property (weak, nonatomic,readonly) OBATripV2 * trip;
+@property (weak, nonatomic,readonly) OBAStopV2 * fromStop;
+@property (weak, nonatomic,readonly) OBAStopV2 * toStop;
 
-@property (nonatomic,readonly) OBATripInstanceRef * tripInstanceRef;
-@property (nonatomic,readonly) OBAArrivalAndDepartureInstanceRef * departureInstanceRef;
-@property (nonatomic,readonly) OBAArrivalAndDepartureInstanceRef * arrivalInstanceRef;
+@property (weak, nonatomic,readonly) OBATripInstanceRef * tripInstanceRef;
+@property (weak, nonatomic,readonly) OBAArrivalAndDepartureInstanceRef * departureInstanceRef;
+@property (weak, nonatomic,readonly) OBAArrivalAndDepartureInstanceRef * arrivalInstanceRef;
 
 
 @end

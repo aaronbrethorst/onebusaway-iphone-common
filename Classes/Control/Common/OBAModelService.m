@@ -37,15 +37,6 @@ static const float kSearchRadius = 400;
 
 @synthesize deviceToken;
 
-- (void) dealloc {
-	[_references release];
-	[_modelDao release];
-	[_modelFactory release];
-	[_obaJsonDataSource release];
-	[_googleMapsJsonDataSource release];
-	[_locationManager release];
-	[super dealloc];
-}
 
 - (id<OBAModelServiceRequest>) requestStopForId:(NSString*)stopId withDelegate:(id<OBAModelServiceDelegate>)delegate withContext:(id)context {
 
@@ -264,7 +255,6 @@ static const float kSearchRadius = 400;
 	SEL selector = nil;
     
     NSString * argsValue = [self argsFromDictionary:args];
-    [args release];
 	
 	OBAModelServiceRequest * request = [self request:url args:argsValue selector:selector delegate:delegate context:context];
 	request.checkCode = FALSE;
@@ -368,7 +358,6 @@ static const float kSearchRadius = 400;
     }
     
     args[@"data"] = data;
-    [data release];
     
 	SEL selector = @selector(getCurrentVehicleEstimatesV2FromJSON:error:);
     
@@ -400,7 +389,6 @@ static const float kSearchRadius = 400;
 	SEL selector = @selector(getItinerariesV2FromJSON:error:);
     
     NSString * argsValue = [self argsFromDictionary:args];
-    [args release];
     
     return [self request:url args:argsValue selector:selector delegate:delegate context:context];
     //return [self post:url args:args selector:selector delegate:delegate context:context];
@@ -436,7 +424,6 @@ static const float kSearchRadius = 400;
         {
             args[@"data"] = json;
         }
-        [json release];
     }
     
     NSData * token = self.deviceToken;
@@ -446,12 +433,10 @@ static const float kSearchRadius = 400;
         [tokenString appendFormat:@"%02X",(unsigned long)(tokenBuffer[i])];
     args[@"url"] = tokenString;
     NSLog(@"Token String: %@ %d",tokenString,[token length]);
-    [tokenString release];
     
     SEL selector = @selector(getAlarmIdFromJSON:error:);
                                    
     NSString * argsValue = [self argsFromDictionary:args];
-    [args release];
 	
 	return [self request:url args:argsValue selector:selector delegate:delegate context:context];
 }
@@ -470,7 +455,7 @@ static const float kSearchRadius = 400;
     NSString * url = @"/api/where/cancel-alarms.json";
 
     NSMutableString * args = [NSMutableString string];
-    for( NSString * alarmId in alarmIds ) {
+    for( __strong NSString * alarmId in alarmIds ) {
         alarmId = [self escapeStringForUrl:alarmId];
         if( [args length] > 0 )
             [args appendString:@"&"];
@@ -509,7 +494,7 @@ static const float kSearchRadius = 400;
 
 - (OBAModelServiceRequest*) request:(OBAJsonDataSource*)source selector:(SEL)selector delegate:(id<OBAModelServiceDelegate>)delegate context:(id)context {
 
-	OBAModelServiceRequest * request = [[[OBAModelServiceRequest alloc] init] autorelease];
+	OBAModelServiceRequest * request = [[OBAModelServiceRequest alloc] init];
 	request.delegate = delegate;
 	request.context = context;
 	request.modelFactory = _modelFactory;
@@ -538,7 +523,7 @@ static const float kSearchRadius = 400;
 		location = _modelDao.mostRecentLocation;
 	
 	if( ! location )
-		location = [[[CLLocation alloc] initWithLatitude:47.61229680032385  longitude:-122.3386001586914] autorelease];
+		location = [[CLLocation alloc] initWithLatitude:47.61229680032385  longitude:-122.3386001586914];
 	
 	return location;
 }

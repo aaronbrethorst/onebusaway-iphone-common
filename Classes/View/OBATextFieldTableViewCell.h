@@ -21,7 +21,7 @@
 	UITextField * _textField;
 }
 
-@property (nonatomic,retain) IBOutlet UITextField * textField;
+@property (nonatomic,strong) IBOutlet UITextField * textField;
 
 + (OBATextFieldTableViewCell*) getOrCreateCellForTableView:(UITableView*)tableView;
 

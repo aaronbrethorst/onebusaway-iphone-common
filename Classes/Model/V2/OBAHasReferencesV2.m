@@ -8,14 +8,10 @@
 - (id) initWithReferences:(OBAReferencesV2*)refs {
     self = [super init];
 	if( self ) {
-		_references = [refs retain];
+		_references = refs;
 	}
 	return self;
 }
 
-- (void) dealloc {
-	[_references release];
-	[super dealloc];
-}
 
 @end

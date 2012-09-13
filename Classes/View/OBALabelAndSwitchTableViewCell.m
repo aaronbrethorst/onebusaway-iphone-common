@@ -33,10 +33,5 @@
 	return cell;
 }
 
-- (void)dealloc {
-	[_label release];
-	[_toggleSwitch release];
-    [super dealloc];
-}
 
 @end

@@ -8,7 +8,7 @@
 
 @property (nonatomic) NSInteger arrivalTime;
 @property (nonatomic) NSInteger departureTime;
-@property (nonatomic,retain) NSString * stopId;
+@property (nonatomic,strong) NSString * stopId;
 
-@property (nonatomic,readonly) OBAStopV2 * stop;
+@property (weak, nonatomic,readonly) OBAStopV2 * stop;
 @end

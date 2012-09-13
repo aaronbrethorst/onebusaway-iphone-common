@@ -16,9 +16,9 @@
 
 - (id) initWithApplicationContext:(OBAApplicationContext*)appContext;
 
-@property (nonatomic,retain) IBOutlet OBAApplicationContext * appContext;
+@property (nonatomic,strong) IBOutlet OBAApplicationContext * appContext;
 
-@property (nonatomic,retain) NSString * progressLabel;
+@property (nonatomic,strong) NSString * progressLabel;
 @property (nonatomic) BOOL showUpdateTime;
 
 @property (nonatomic) BOOL refreshable;

@@ -23,19 +23,4 @@
 @synthesize severity;
 @synthesize sensitivity;
 
-- (void) dealloc {
-	
-	self.situationId = nil;
-	
-	self.summary = nil;
-	self.description = nil;
-	self.advice = nil;
-	
-	self.consequences = nil;
-	
-	self.severity = nil;
-	self.sensitivity = nil;
-	
-	[super dealloc];
-}
 @end

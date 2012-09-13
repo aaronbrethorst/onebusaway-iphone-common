@@ -5,6 +5,6 @@
 	id _entry;
 }
 
-@property (nonatomic,retain) id entry;
+@property (nonatomic,strong) id entry;
 
 @end

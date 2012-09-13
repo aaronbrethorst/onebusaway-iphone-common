@@ -7,10 +7,5 @@
 @synthesize path;
 @synthesize distance;
 
-- (void) dealloc {
-    self.streetName = nil;
-    self.path = nil;
-    [super dealloc];
-}
 
 @end

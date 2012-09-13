@@ -24,17 +24,12 @@
 
 - (id) initWithUrl:(NSString*)url args:(NSString*)args {
 	if( self = [super init] ) {
-		_url = [url retain];
-		_args = [args retain];
+		_url = url;
+		_args = args;
 	}
 	return self;
 }
 
-- (void) dealloc {
-	[_url release];
-	[_args  release];
-	[super dealloc];
-}
 
 -(NSURL*) constructURL:(NSString*)path withArgs:(NSString*)args includeArgs:(BOOL)includeArgs {
 	

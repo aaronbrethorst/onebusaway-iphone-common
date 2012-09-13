@@ -15,10 +15,6 @@
 	return self;
 }
 
-- (void) dealloc {
-	[_values release];
-	[super dealloc];
-}
 
 - (void) addValue:(id)value {
 	[_values addObject:value];
