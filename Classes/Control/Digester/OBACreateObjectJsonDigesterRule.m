@@ -52,7 +52,7 @@
 }
 
 - (BOOL)shouldDigestValue:(id)value {
-    BOOL valueIsNull = (!value || CFEqual(value, kCFNull));
+    BOOL valueIsNull = (!value || CFEqual((__bridge CFTypeRef)(value), kCFNull));
     return !(_onlyIfNotNull && valueIsNull);
 }
 

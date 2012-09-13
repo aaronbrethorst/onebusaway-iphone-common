@@ -26,10 +26,6 @@ extern const NSInteger kOBAErrorMissingFieldInData;
  */
 extern NSString * const OBAApplicationDidCompleteNetworkRequestNotification;
 
-
-#define OBA_RELEASE_SAFELY(__POINTER) { [__POINTER release]; __POINTER = nil; }
-
-
 @interface NSObject (OBAConvenienceMethods)
 + (id) releaseOld:(id<NSObject>)oldValue retainNew:(id<NSObject>)newValue;
 @end

@@ -15,12 +15,6 @@
     return self;
 }
 
-- (void) dealloc {
-    OBA_RELEASE_SAFELY(_placemarks);
-    OBA_RELEASE_SAFELY(_attributions);
-    [super dealloc];
-}
-
 - (void) addPlacemark:(OBAPlacemark*)placemark {
     [_placemarks addObject:placemark];
 }
