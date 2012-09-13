@@ -23,7 +23,7 @@
 
 + (CLLocationCoordinate2D) makeCoordinateLat:(CLLocationDegrees)lat lon:(CLLocationDegrees)lon;
 + (MKCoordinateRegion) createRegionWithCenter:(CLLocationCoordinate2D)center latRadius:(double)latRadiusInMeters lonRadius:(double)lonRadiusInMeters;
-+ (double) getDistanceFromRegion:(MKCoordinateRegion)regionA toRegion:(MKCoordinateRegion)regionB;
++ (CLLocationDistance) getDistanceFromRegion:(MKCoordinateRegion)regionA toRegion:(MKCoordinateRegion)regionB;
 + (BOOL) isRegion:(MKCoordinateRegion)regionA containedBy:(MKCoordinateRegion)regionB;
 + (BOOL) isCoordinate:(CLLocationCoordinate2D)coordinate containedBy:(MKCoordinateRegion)region;
 + (NSString*) regionAsString:(MKCoordinateRegion)region;
@@ -36,12 +36,5 @@
 
 + (OBACoordinateBounds*) boundsForLocations:(NSArray*)locations;
 + (OBACoordinateBounds*) boundsForMKPolyline:(MKPolyline*)polyline;
-
-@end
-
-
-@interface CLLocation (OBAConvenienceMethods)
-
-- (CLLocationDistance)distanceFromLocationSafe:(const CLLocation *)location;
 
 @end

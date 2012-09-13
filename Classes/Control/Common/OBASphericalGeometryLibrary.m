@@ -57,10 +57,10 @@ typedef struct {
 	return	MKCoordinateRegionMake(center, span);
 }
 
-+ (double) getDistanceFromRegion:(MKCoordinateRegion)regionA toRegion:(MKCoordinateRegion)regionB {
++ (CLLocationDistance) getDistanceFromRegion:(MKCoordinateRegion)regionA toRegion:(MKCoordinateRegion)regionB {
 	CLLocation * a = [[[CLLocation alloc] initWithLatitude:regionA.center.latitude longitude:regionA.center.longitude] autorelease];
 	CLLocation * b = [[[CLLocation alloc] initWithLatitude:regionB.center.latitude longitude:regionB.center.longitude] autorelease];
-	return [a distanceFromLocationSafe:b];	
+	return [a distanceFromLocation:b];
 }
 
 + (BOOL) isRegion:(MKCoordinateRegion)regionA containedBy:(MKCoordinateRegion)regionB {
@@ -155,7 +155,7 @@ typedef struct {
 	CLLocation * prevLocation = nil;
 	for (int i=0; i<points.count;i++) {
 		CLLocation * location = [points objectAtIndex:i];
-		if( prevLocation == nil || i == (points.count - 1) || [prevLocation distanceFromLocationSafe:location] > minDistance ) {
+		if( prevLocation == nil || i == (points.count - 1) || [prevLocation distanceFromLocation:location] > minDistance ) {
 			[array addObject:location];
 			prevLocation = location;
 		}
@@ -188,16 +188,6 @@ typedef struct {
 	return bounds;
 }
 
-
-@end
-
-@implementation CLLocation (OBAConvenienceMethods)
-
-- (CLLocationDistance)distanceFromLocationSafe:(const CLLocation *)location {
-	if( [self respondsToSelector:@selector(distanceFromLocation:)] )
-		return [self distanceFromLocation:location];
-	return [self getDistanceFrom:location];			
-}
 
 @end
 
