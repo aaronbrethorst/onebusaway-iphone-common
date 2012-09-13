@@ -24,29 +24,29 @@
 
 - (BOOL) isEqualWithOptionalVehicleId:(OBAArrivalAndDepartureInstanceRef*)ref {
     if ( ![_tripInstance isEqualWithOptionalVehicleId:ref.tripInstance] )
-        return FALSE;
+        return NO;
     if ( ![_stopId isEqualToString:ref.stopId] )
-        return FALSE;
+        return NO;
     if ( _stopSequence != ref.stopSequence )
-        return FALSE;
-    return TRUE;
+        return NO;
+    return YES;
 }
 
 - (BOOL) isEqual:(id)object {
     if (self == object)
-        return TRUE;
+        return YES;
     if (object == nil)
-        return FALSE;
+        return NO;
     if ( ![object isKindOfClass:[OBAArrivalAndDepartureInstanceRef class]] )
-        return FALSE;
+        return NO;
     OBAArrivalAndDepartureInstanceRef * instanceRef = object;
     if ( ![_tripInstance isEqual:instanceRef.tripInstance] )
-        return FALSE;
+        return NO;
     if ( ![_stopId isEqualToString:instanceRef.stopId] )
-        return FALSE;
+        return NO;
     if ( _stopSequence != instanceRef.stopSequence )
-        return FALSE;
-    return TRUE;
+        return NO;
+    return YES;
 }
 
 - (NSString*) description {

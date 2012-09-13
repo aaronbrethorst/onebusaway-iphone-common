@@ -73,7 +73,7 @@
 
 - (id<OBADataSourceConnection>) requestWithPath:(NSString*)path withArgs:(NSString*)args withDelegate:(id<OBADataSourceDelegate>)delegate context:(id)context {
 	
-	NSURL *feedURL = [_config constructURL:path withArgs:args includeArgs:TRUE];
+	NSURL *feedURL = [_config constructURL:path withArgs:args includeArgs:YES];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:feedURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval: 20];
 	[request setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"]; 
 	JsonUrlFetcherImpl * fetcher = [[JsonUrlFetcherImpl alloc] initWithSource:self withDelegate:delegate context:context];
@@ -87,7 +87,7 @@
 
 - (id<OBADataSourceConnection>) postWithPath:(NSString*)url withArgs:(NSDictionary*)args withDelegate:(NSObject<OBADataSourceDelegate>*)delegate context:(id)context {
 	
-	NSURL *targetUrl = [_config constructURL:url withArgs:nil includeArgs:FALSE];
+	NSURL *targetUrl = [_config constructURL:url withArgs:nil includeArgs:NO];
 	NSMutableURLRequest *postRequest = [NSMutableURLRequest requestWithURL:targetUrl];
 	[postRequest setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
 	[postRequest setHTTPMethod:@"POST"];
@@ -96,7 +96,7 @@
 	[postRequest setHTTPBody:[formBody dataUsingEncoding:NSUTF8StringEncoding]];
 	
 	JsonUrlFetcherImpl * fetcher = [[JsonUrlFetcherImpl alloc] initWithSource:self withDelegate:delegate context:context];
-	fetcher.uploading = TRUE;
+	fetcher.uploading = YES;
 
 	@synchronized(self) {
 		[_openConnections addObject:fetcher];		
@@ -109,7 +109,7 @@
 
 - (id<OBADataSourceConnection>) requestWithPath:(NSString*)url withArgs:(NSString*)args withFileUpload:(NSString*)path withDelegate:(NSObject<OBADataSourceDelegate>*)delegate context:(id)context {
 
-	NSURL *targetUrl = [_config constructURL:url withArgs:args includeArgs:TRUE];
+	NSURL *targetUrl = [_config constructURL:url withArgs:args includeArgs:YES];
 	NSMutableURLRequest *postRequest = [NSMutableURLRequest requestWithURL:targetUrl];
 	//[postRequest setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
 	
@@ -131,7 +131,7 @@
 	[postRequest setHTTPBody:postBody];
 	
 	JsonUrlFetcherImpl * fetcher = [[JsonUrlFetcherImpl alloc] initWithSource:self withDelegate:delegate context:context];
-	fetcher.uploading = TRUE;
+	fetcher.uploading = YES;
 	@synchronized(self) {
 		[_openConnections addObject:fetcher];		
 		[NSURLConnection connectionWithRequest:postRequest delegate:fetcher];
@@ -213,8 +213,8 @@
 		_context = [context retain];
 		
 		_jsonData = [[NSMutableData alloc] initWithCapacity:0];
-		_uploading = FALSE;
-		_canceled = FALSE;
+		_uploading = NO;
+		_canceled = NO;
 		
 	}
 	return self;
@@ -233,7 +233,7 @@
 	@synchronized(self) {
 		if( _canceled )
 			return;
-		_canceled = TRUE;
+		_canceled = YES;
 		[_connection cancel];
 		_delegate = nil;
 		[self autorelease];
@@ -319,7 +319,7 @@
 		
 		if( _canceled )
 			return;
-		_canceled = TRUE;
+		_canceled = YES;
 		
 		[_delegate connectionDidFail:self withError:error context:_context];
 		[_source removeOpenConnection:self];

@@ -28,7 +28,7 @@
 - (id) init {
     self = [super init];
 	if( self ) {
-		_empty = TRUE;
+		_empty = YES;
 	}
 	return self;
 }
@@ -48,7 +48,7 @@
 - (id) initWithRegion:(MKCoordinateRegion)region {
     self = [super init];
     if( self ) {
-        _empty = TRUE;
+        _empty = YES;
         [self addRegion:region];
     }
     return self;
@@ -114,7 +114,7 @@
 
 - (void) addLat:(double)lat lon:(double)lon {
 	if( _empty ) {
-		_empty = FALSE;
+		_empty = NO;
 
 		_minLatitude = lat;
 		_maxLatitude = lat;

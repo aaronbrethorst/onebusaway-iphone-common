@@ -28,9 +28,9 @@
 
 - (BOOL) isEqualWithOptionalVehicleId:(OBATripInstanceRef*)ref {
     if ( ![_tripId isEqualToString:ref.tripId] )
-        return FALSE;
+        return NO;
     if ( _serviceDate != ref.serviceDate )
-        return FALSE;
+        return NO;
     /**
      * With the optional vehicle id semantics, the only time we consider the vehicle ids
      * not to match is when they are both set AND not equal.  This helps us fuzzy match
@@ -39,26 +39,26 @@
      */
     if (_vehicleId != nil && ref.vehicleId != nil) {
         if ( ! [_vehicleId isEqualToString:_vehicleId] )
-            return FALSE;
+            return NO;
     }    
-    return TRUE;
+    return YES;
 }
 
 - (BOOL) isEqual:(id)object {
     if (self == object)
-        return TRUE;
+        return YES;
     if (object == nil)
-        return FALSE;
+        return NO;
     if ( ![object isKindOfClass:[OBATripInstanceRef class]] )
-        return FALSE;
+        return NO;
     OBATripInstanceRef * instanceRef = object;
     if ( ![_tripId isEqualToString:instanceRef.tripId] )
-        return FALSE;
+        return NO;
     if ( _serviceDate != instanceRef.serviceDate )
-        return FALSE;
+        return NO;
     if ( ! [_vehicleId isEqualToString:_vehicleId] )
-        return FALSE;
-    return TRUE;
+        return NO;
+    return YES;
 }
 
 - (NSString*) description {

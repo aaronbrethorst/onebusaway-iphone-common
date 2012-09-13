@@ -46,16 +46,17 @@
 - (NSString*) routeNamesAsString {
 	
 	NSMutableString * label = [NSMutableString string];
-	BOOL first = TRUE;
+	BOOL first = YES;
 	
 	NSArray * sRoutes = [self routes];
-	
+
+    // TODO: -componentsJoinedByString
 	for( OBARouteV2 * route in sRoutes ) {
 		
 		if( first )
-			first = FALSE;
+			first = NO;
 		else
-			[label  appendString:@", "];
+			[label appendString:@", "];
 		[label appendString:[route safeShortName]];
 	}
 	return label;
@@ -84,7 +85,7 @@
 
 - (BOOL) isEqual:(id)object {
 	if (![object isKindOfClass:[OBAStopV2 class]])
-		return FALSE;
+		return NO;
 	OBAStopV2 * stop = object;
 	return [self.stopId isEqual:stop.stopId];
 }

@@ -87,7 +87,7 @@
 	_progressView = [[UIProgressView alloc] initWithFrame:progressViewFrame];	
 
 	self.backgroundColor = [UIColor clearColor];
-	self.autoresizesSubviews = TRUE;
+	self.autoresizesSubviews = YES;
 	
 	[self setupLabel:_label];
 	[self setupLabel:_progressLabel];
@@ -100,10 +100,10 @@
 	[self addSubview:_activityIndicator];
 	[self addSubview:_progressView];
 	
-	_label.hidden = TRUE;
-	_progressLabel.hidden = TRUE;
-	_activityIndicator.hidden = TRUE;
-	_progressView.hidden = TRUE;
+	_label.hidden = YES;
+	_progressLabel.hidden = YES;
+	_activityIndicator.hidden = YES;
+	_progressView.hidden = YES;
 }
 
 - (void) setupLabel:(UILabel*)label {

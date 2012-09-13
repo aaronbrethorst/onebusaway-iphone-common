@@ -25,7 +25,7 @@
 
 
 - (UIImage*) getIconForStop:(OBAStopV2*)stop {
-    return [self getIconForStop:stop includeDirection:TRUE];
+    return [self getIconForStop:stop includeDirection:YES];
 }
 
 - (UIImage*) getIconForStop:(OBAStopV2*)stop includeDirection:(BOOL)includeDirection {
@@ -46,7 +46,7 @@
 }
 
 - (UIImage*) getModeIconForRoute:(OBARouteV2*)route {
-    return [self getModeIconForRoute:route selected:FALSE];
+    return [self getModeIconForRoute:route selected:NO];
 }
 
 - (UIImage*) getModeIconForRoute:(OBARouteV2*)route selected:(BOOL)selected {

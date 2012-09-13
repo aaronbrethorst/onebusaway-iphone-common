@@ -48,8 +48,8 @@ typedef enum  {
     self = [super init];
     if (self) {
         _mapView = mapView;
-        _lastRegionChangeWasProgramatic = FALSE;
-        _currentlyChangingRegion = FALSE;
+        _lastRegionChangeWasProgramatic = NO;
+        _currentlyChangingRegion = NO;
         _pendingRegionChangeRequest = nil;
         _appliedRegionChangeRequests = [[NSMutableArray alloc] init];
     }
@@ -66,12 +66,12 @@ typedef enum  {
 }
 
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
-    _currentlyChangingRegion = TRUE;
+    _currentlyChangingRegion = YES;
 }
 
 - (BOOL)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     
-    _currentlyChangingRegion = FALSE;
+    _currentlyChangingRegion = NO;
     
     /**
      * We need to figure out if this region change came from the user dragging the map                                                                                                                                         
@@ -98,12 +98,12 @@ typedef enum  {
     _lastRegionChangeWasProgramatic = (type == OBARegionChangeRequestTypeProgramatic);
     //OBALogDebug(@"regionDidChangeAnimated: setting _lastRegionChangeWasProgramatic to %d", _lastRegionChangeWasProgramatic);
     
-    BOOL applyingPendingRequest = FALSE;
+    BOOL applyingPendingRequest = NO;
     
     if( _lastRegionChangeWasProgramatic && _pendingRegionChangeRequest ) {
         //OBALogDebug(@"applying pending reqest");
         [self setMapRegionWithRequest:_pendingRegionChangeRequest];
-        applyingPendingRequest = TRUE;
+        applyingPendingRequest = YES;
     }
     
     _pendingRegionChangeRequest = [NSObject releaseOld:_pendingRegionChangeRequest retainNew:nil];
@@ -137,7 +137,7 @@ typedef enum  {
     }
     else {
         [_appliedRegionChangeRequests addObject:request];
-        [_mapView setRegion:request.region animated:TRUE];
+        [_mapView setRegion:request.region animated:YES];
     }
 }
 

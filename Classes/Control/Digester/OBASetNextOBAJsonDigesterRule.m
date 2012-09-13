@@ -26,7 +26,7 @@
     self = [super init];
 	if( self ) {
 		_selector = selector;
-		_onlyIfNotNull = TRUE;
+		_onlyIfNotNull = YES;
 	}
 	return self;
 }

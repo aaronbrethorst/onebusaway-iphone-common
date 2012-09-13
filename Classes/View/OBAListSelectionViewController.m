@@ -61,7 +61,7 @@
 		[_target performSelector:_action withObject:indexPath];
     
     if (self.exitOnSelection) {
-        [self.navigationController popViewControllerAnimated:TRUE];
+        [self.navigationController popViewControllerAnimated:YES];
     }								 
 }
 

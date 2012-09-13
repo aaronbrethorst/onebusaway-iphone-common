@@ -28,7 +28,7 @@
 - (id) initWithObjectClass:(Class)objectClass {
 	if( self = [super init] ) {
 		_objectClass = objectClass;
-		_onlyIfNotNull = TRUE;
+		_onlyIfNotNull = YES;
 	}
 	return self;
 }

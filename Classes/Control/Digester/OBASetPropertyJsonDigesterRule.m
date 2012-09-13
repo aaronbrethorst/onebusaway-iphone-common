@@ -24,7 +24,7 @@
 - (id) initWithPropertyName:(NSString*)propertyName {
     self = [super init];
 	if( self ) {
-		if (!(self = [self initWithPropertyName:propertyName onlyIfNeeded:FALSE])) return nil;
+		if (!(self = [self initWithPropertyName:propertyName onlyIfNeeded:NO])) return nil;
 		_propertyName = propertyName;		
 	}
 	return self;

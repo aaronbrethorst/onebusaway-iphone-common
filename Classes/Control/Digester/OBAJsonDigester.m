@@ -57,7 +57,7 @@
     self = [super init];
 	if( self ) {
 		_rulesByPrefix = [[NSMutableDictionary alloc] init];
-		_verbose = FALSE;
+		_verbose = NO;
 	}
 	return self;
 }
@@ -89,13 +89,13 @@
 
 - (void) addSetOptionalPropertyRule:(NSString*)property forPrefix:(NSString*)prefix {
 	OBASetPropertyJsonDigesterRule * rule = [[OBASetPropertyJsonDigesterRule alloc] initWithPropertyName:property];
-	rule.optional = TRUE;
+	rule.optional = YES;
 	[self addRule:rule forPrefix:prefix];
 }
 
 
 - (void) addSetPropertyIfNeededRule:(NSString*)property forPrefix:(NSString*)prefix {
-	OBASetPropertyJsonDigesterRule * rule = [[OBASetPropertyJsonDigesterRule alloc] initWithPropertyName:property onlyIfNeeded:TRUE];
+	OBASetPropertyJsonDigesterRule * rule = [[OBASetPropertyJsonDigesterRule alloc] initWithPropertyName:property onlyIfNeeded:YES];
 	[self addRule:rule forPrefix:prefix];
 	
 }

@@ -20,7 +20,7 @@
 static const NSTimeInterval kSuccessiveLocationComparisonWindow = 3;
 
 #if TARGET_IPHONE_SIMULATOR
-static const BOOL kUseLocationTraceInSimulator = FALSE;
+static const BOOL kUseLocationTraceInSimulator = NO;
 #endif
 
 @interface OBALocationManager (Private)
@@ -42,7 +42,7 @@ static const BOOL kUseLocationTraceInSimulator = FALSE;
 - (id) initWithModelDao:(OBAModelDAO*)modelDao {
 	if( self = [super init]) {
 		_modelDao = modelDao;
-		_disabled = FALSE;
+		_disabled = NO;
 		_locationManager = [[CLLocationManager alloc] init];
 		_locationManager.delegate = self;
 		_delegates = [[NSMutableArray alloc] init];
@@ -57,9 +57,7 @@ static const BOOL kUseLocationTraceInSimulator = FALSE;
 
 
 - (BOOL) locationServicesEnabled {
-	if( _disabled )
-		return FALSE;
-    return [CLLocationManager locationServicesEnabled];
+    return _disabled ? NO : [CLLocationManager locationServicesEnabled];
 }
 
 - (void) addDelegate:(id<OBALocationManagerDelegate>)delegate {
@@ -81,7 +79,7 @@ static const BOOL kUseLocationTraceInSimulator = FALSE;
 	else {
 		if (! [_modelDao hideFutureLocationWarnings]) {
 			[_locationManager startUpdatingLocation];
-			[_modelDao setHideFutureLocationWarnings:TRUE];			
+			[_modelDao setHideFutureLocationWarnings:YES];			
 		}
 	}
 }
@@ -94,8 +92,8 @@ static const BOOL kUseLocationTraceInSimulator = FALSE;
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
 	
-	_disabled = FALSE;
-	[_modelDao setHideFutureLocationWarnings:FALSE];
+	_disabled = NO;
+	[_modelDao setHideFutureLocationWarnings:NO];
 
 #if TARGET_IPHONE_SIMULATOR
 	
@@ -124,7 +122,7 @@ static const BOOL kUseLocationTraceInSimulator = FALSE;
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
 	
 	if( [error code] == kCLErrorDenied ) {
-		_disabled = TRUE;
+		_disabled = YES;
 		[self stopUpdatingLocation];
 		for( id<OBALocationManagerDelegate> delegate in _delegates )
 			[delegate locationManager:self didFailWithError:error];

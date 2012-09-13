@@ -1,6 +1,4 @@
 #import "OBAModelServiceRequest.h"
-#import "UIDeviceExtensions.h"
-
 
 @interface OBAModelServiceRequest (Private)
 
@@ -23,8 +21,8 @@
 
 - (id) init {
 	if( self = [super init] ) {
-		_checkCode = TRUE;
-		if ([[UIDevice currentDevice] isMultitaskingSupportedSafe])
+		_checkCode = YES;
+		if ([[UIDevice currentDevice] isMultitaskingSupported])
             _bgTask = UIBackgroundTaskInvalid;
 		
 		/**
@@ -32,7 +30,7 @@
 		 * in the delegate methods.  To make sure we stick around long enough to perform cleanup,
 		 * we keep a reference to ourselves that we'll release in the cleanup phase.
 		 */
-		_clean = FALSE;
+		_clean = NO;
 		[self retain];		
 	}
 	return self;
@@ -91,7 +89,7 @@
 
 // check if we support background task completion; if so, end bg task
 - (void) endBackgroundTask {		
-	if ([[UIDevice currentDevice] isMultitaskingSupportedSafe]) {
+	if ([[UIDevice currentDevice] isMultitaskingSupported]) {
 		if (_bgTask != UIBackgroundTaskInvalid) {
 			UIApplication* app = [UIApplication sharedApplication];
 			[app endBackgroundTask:_bgTask];
@@ -134,7 +132,7 @@
 - (void) cleanup {
 	if( _clean )
 		return;
-	_clean = TRUE;
+	_clean = YES;
 	[self endBackgroundTask];
 	[self release];
 }

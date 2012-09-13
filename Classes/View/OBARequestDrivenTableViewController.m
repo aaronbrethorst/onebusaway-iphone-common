@@ -28,7 +28,7 @@
 		_progressView = [[OBAProgressIndicatorView alloc] initWithFrame:r];
 		[self.navigationItem setTitleView:_progressView];
 		_progressLabel = @"";
-		_showUpdateTime = FALSE;
+		_showUpdateTime = NO;
 	}
 	return self;
 }
@@ -63,11 +63,11 @@
 }
 
 - (BOOL) isLoading {
-	return TRUE;
+	return YES;
 }
 
 - (void) refresh {
-	[_progressView setMessage:@"Updating..." inProgress:TRUE progress:0];
+	[_progressView setMessage:@"Updating..." inProgress:YES progress:0];
 	[self didRefreshBegin];
 	[self clearPendingRequest];
 	_request = [self handleRefresh];
@@ -120,20 +120,20 @@
 
 - (void)requestDidFinish:(id<OBAModelServiceRequest>)request withCode:(NSInteger)code context:(id)context {
 	if( code == 404 )
-		[_progressView setMessage:@"Not found" inProgress:FALSE progress:0];
+		[_progressView setMessage:@"Not found" inProgress:NO progress:0];
 	else
-		[_progressView setMessage:@"Unknown error" inProgress:FALSE progress:0];
+		[_progressView setMessage:@"Unknown error" inProgress:NO progress:0];
 	[self didRefreshEnd];
 }
 
 - (void)requestDidFail:(id<OBAModelServiceRequest>)request withError:(NSError *)error context:(id)context {
 	OBALogWarningWithError(error, @"Error");
-	[_progressView setMessage:@"Error connecting" inProgress:FALSE progress:0];
+	[_progressView setMessage:@"Error connecting" inProgress:NO progress:0];
 	[self didRefreshEnd];
 }
 
 - (void)request:(id<OBAModelServiceRequest>)request withProgress:(float)progress context:(id)context {
-	[_progressView setInProgress:TRUE progress:progress];
+	[_progressView setInProgress:YES progress:progress];
 	[self didRefreshEnd];
 }
 
@@ -185,7 +185,7 @@
 
 - (void) checkTimer {
 	if( _refreshInterval > 0 ) {
-		_timer = [NSTimer scheduledTimerWithTimeInterval:_refreshInterval target:self selector:@selector(refresh) userInfo:nil repeats:TRUE];
+		_timer = [NSTimer scheduledTimerWithTimeInterval:_refreshInterval target:self selector:@selector(refresh) userInfo:nil repeats:YES];
 	}
 	else {
 		[_timer invalidate];
@@ -197,20 +197,20 @@
 	NSString * label = _progressLabel;
 	if( _showUpdateTime )
 		label = [NSString stringWithFormat:@"Updated: %@", [OBACommon getTimeAsString]];
-	[_progressView setMessage:label inProgress:FALSE progress:0];
+	[_progressView setMessage:label inProgress:NO progress:0];
 }
 
 - (void) didRefreshBegin {    
     UIBarButtonItem * refreshItem = [self.navigationItem rightBarButtonItem];
 	if( refreshItem )
-		[refreshItem setEnabled:FALSE];
+		[refreshItem setEnabled:NO];
 	
 }
 
 - (void) didRefreshEnd {
 	UIBarButtonItem * refreshItem = [self.navigationItem rightBarButtonItem];
 	if( refreshItem )
-		[refreshItem setEnabled:TRUE];
+		[refreshItem setEnabled:YES];
 }
 
 @end

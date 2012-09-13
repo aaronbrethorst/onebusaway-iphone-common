@@ -1,6 +1,5 @@
 #import "OBAModelService.h"
 #import "OBAModelServiceRequest.h"
-#import "UIDeviceExtensions.h"
 #import "OBASearchController.h"
 #import "OBASphericalGeometryLibrary.h"
 
@@ -223,20 +222,20 @@ static const float kSearchRadius = 400;
  
     NSString * url = [NSString stringWithFormat:@"/api/where/report-problem-with-planned-trip.json"];
 
-    NSMutableDictionary * args = [[NSMutableDictionary alloc] init];
-    
     CLLocationCoordinate2D from = problem.fromLocation.coordinate;
     CLLocationCoordinate2D to = problem.toLocation.coordinate;
     BOOL arriveBy = problem.arriveBy;
     NSDate * t = problem.time;
-        
-    args[@"time"] = [NSString stringWithFormat:@"%lld",t];
-    args[@"latFrom"] = [NSString stringWithFormat:@"%f",from.latitude];
-    args[@"lonFrom"] = [NSString stringWithFormat:@"%f",from.longitude];
-    args[@"latTo"] = [NSString stringWithFormat:@"%f",to.latitude];
-    args[@"lonTo"] = [NSString stringWithFormat:@"%f",to.longitude];
-    args[@"arriveBy"] = (arriveBy ? @"true" : @"false");
-    args[@"useRealTime"] = @"true";
+
+    NSMutableDictionary *args = [NSMutableDictionary dictionaryWithDictionary:@{
+        @"time": [NSString stringWithFormat:@"%lld",t],
+        @"latFrom": [NSString stringWithFormat:@"%f",from.latitude],
+        @"lonFrom": [NSString stringWithFormat:@"%f",from.longitude],
+        @"latTo": [NSString stringWithFormat:@"%f",to.latitude],
+        @"lonTo": [NSString stringWithFormat:@"%f",to.longitude],
+        @"arriveBy": (arriveBy ? @"true" : @"false"),
+        @"useRealTime": @"true"
+                                 }];
 	
 	if( problem.data )
 		args[@"data"] = problem.data;
@@ -257,7 +256,7 @@ static const float kSearchRadius = 400;
     NSString * argsValue = [self argsFromDictionary:args];
 	
 	OBAModelServiceRequest * request = [self request:url args:argsValue selector:selector delegate:delegate context:context];
-	request.checkCode = FALSE;
+	request.checkCode = NO;
 	return request;
 }
 
@@ -286,7 +285,7 @@ static const float kSearchRadius = 400;
 	SEL selector = nil;
 	
 	OBAModelServiceRequest * request = [self post:url args:args selector:selector delegate:delegate context:context];
-	request.checkCode = FALSE;
+	request.checkCode = NO;
 	return request;
 }
 
@@ -329,7 +328,7 @@ static const float kSearchRadius = 400;
 	SEL selector = nil;
 	
 	OBAModelServiceRequest * request = [self post:url args:args selector:selector delegate:delegate context:context];
-	request.checkCode = FALSE;
+	request.checkCode = NO;
 	return request;
 }
 
@@ -501,11 +500,11 @@ static const float kSearchRadius = 400;
 	request.modelFactorySelector = selector;
 	
 	if( source != _obaJsonDataSource )
-		request.checkCode = FALSE;
+		request.checkCode = NO;
 	
 	// if we support background task completion (iOS >= 4.0), allow our requests to complete
 	// even if the user switches the foreground application.
-	if ([[UIDevice currentDevice] isMultitaskingSupportedSafe]) {
+	if ([[UIDevice currentDevice] isMultitaskingSupported]) {
 		UIApplication* app = [UIApplication sharedApplication];
 		request.bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
 			[request endBackgroundTask];

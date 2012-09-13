@@ -25,7 +25,7 @@
 @synthesize readOnly = _readOnly;
 
 +(OBATextEditViewController*)pushOntoViewController:(UIViewController*)parent withText:(NSString*)text withTitle:(NSString*)title {
-	return [self pushOntoViewController:parent withText:text withTitle:title readOnly:FALSE];
+	return [self pushOntoViewController:parent withText:text withTitle:title readOnly:NO];
 }
 
 +(OBATextEditViewController*)pushOntoViewController:(UIViewController*)parent withText:(NSString*)text withTitle:(NSString*)title readOnly:(BOOL)readOnly {
@@ -37,7 +37,7 @@
 	[textView setText:text];
 	
 	if( readOnly ) {
-		[controller textView].editable = FALSE;
+		[controller textView].editable = NO;
 		controller.navigationItem.rightBarButtonItem = nil;
 	}
 	
@@ -83,7 +83,7 @@
 -(IBAction)save:(id)sender {
 	if( _target && _action && [_target respondsToSelector:_action] )
 		[_target performSelector:_action withObject:[[self textView] text]];
-	[self.navigationController popViewControllerAnimated:TRUE];
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
