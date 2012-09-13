@@ -70,7 +70,7 @@ static const BOOL kUseLocationTraceInSimulator = FALSE;
 - (BOOL) locationServicesEnabled {
 	if( _disabled )
 		return FALSE;
-	return _locationManager.locationServicesEnabled;
+    return [CLLocationManager locationServicesEnabled];
 }
 
 - (void) addDelegate:(id<OBALocationManagerDelegate>)delegate {
@@ -86,7 +86,7 @@ static const BOOL kUseLocationTraceInSimulator = FALSE;
 }
 
 -(void) startUpdatingLocation {
-	if( _locationManager.locationServicesEnabled ) {
+	if( [CLLocationManager locationServicesEnabled] ) {
 		[_locationManager startUpdatingLocation];
 	}
 	else {
