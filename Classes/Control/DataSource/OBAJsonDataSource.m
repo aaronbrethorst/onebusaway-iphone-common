@@ -16,8 +16,6 @@
 
 #import "OBAJsonDataSource.h"
 #import "OBALogger.h"
-#import "SBJSON/SBJson.h"
-
 
 /****
  * Internal JsonUrlFetcher class that we pass on to our NSURLConnection
@@ -290,26 +288,25 @@
 	
 	@synchronized(self) {
 		
-		if( _canceled )
-			return;
-		_canceled = TRUE;
-		
-		NSString * v = [[NSString alloc] initWithData:_jsonData encoding:_responseEncoding];
-        SBJsonParser * parser = [[SBJsonParser alloc] init];
-		NSError * error = nil;
-		id jsonObject = nil;
+		if (_canceled)
+        {
+            return;
+        }
+        
+		_canceled = YES;
 
-		if( v && [v length] > 0 )
-			jsonObject = [parser objectWithString:v error:&error];
-		
-		if( error)
+        NSError *error = nil;
+        id jsonObject = [NSJSONSerialization JSONObjectWithData:_jsonData options:0 error:&error];
+
+		if (error)
+        {
 			[_delegate connectionDidFail:self withError:error context:_context];
+        }
 		else
-			[_delegate connectionDidFinishLoading:self withObject:jsonObject context:_context];
-		
-		[v release];
-		[parser release];
-		
+		{
+            [_delegate connectionDidFinishLoading:self withObject:jsonObject context:_context];
+        }
+				
 		[_source removeOpenConnection:self];
 		_delegate = nil;
 		[self autorelease];
